@@ -10,8 +10,8 @@ def booking(request):
     return render(request, "booking.html")
 
 
-def users(request):
-    return render(request, "users.html")
+def user(request):
+    return render(request, "user.html")
 
 
 def contacts(request):
