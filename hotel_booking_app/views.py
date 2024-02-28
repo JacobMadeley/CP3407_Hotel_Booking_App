@@ -14,5 +14,5 @@ def user(request):
     return render(request, "user.html")
 
 
-def contacts(request):
+def contact(request):
   return render(request, "contact.html")
