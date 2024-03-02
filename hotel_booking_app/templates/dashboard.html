@@ -1,19 +1,100 @@
-{% include 'navbar.html' %} 
-{% load static %} 
-<link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
-<title>Dashboard</title> 
-<section class="dahsboard"> 
-        <center> 
-            <font size="6"> 
-                  
-<p>ABOUT ME </p> 
-  
-            </font> 
 
-            <font size="4"> 
-                  
-<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p> 
-  
-            </font> 
-        </center> 
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .card p {
+            font-size: 16px;
+            color: #777;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .grid-item {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .grid-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .grid-item p {
+            font-size: 16px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Hotel Booking Dashboard</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+                <h3>Recent Bookings</h3>
+                <ul>
+                    {% for booking in bookings %}
+                    <li>{{ booking.guest_name }} - Room: {{ booking.room.room_number }}</li>
+                    {% empty %}
+                    <li>No recent bookings found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h3>Available Rooms</h3>
+                <ul>
+                    {% for room in rooms %}
+                    <li>Room: {{ room.room_number }} - Type: {{ room.room_type }} - Cost: ${{ room.room_cost }}</li>
+                    {% empty %}
+                    <li>No rooms available.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h3>Inventory Status</h3>
+                <p>Available Rooms: {{ inventory.rooms_available }}</p>
+                <p>Rooms in Use: {{ inventory.rooms_in_use }}</p>
+                <p>Rooms to be Cleaned: {{ inventory.rooms_to_be_cleaned }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
