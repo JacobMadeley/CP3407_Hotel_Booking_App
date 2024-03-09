@@ -16,3 +16,6 @@ def user(request):
 
 def contact(request):
   return render(request, "contact.html")
+
+def inventory(request):
+    return render(request, "inventory.html")
