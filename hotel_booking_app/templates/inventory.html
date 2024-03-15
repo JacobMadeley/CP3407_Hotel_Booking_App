@@ -10,4 +10,10 @@
 </head>
 <body>
     Hello
+    <h3>Inventory Status</h3>
+                {% for room in Inventory %}
+                <li>{{ room.id }} | {{ room.rooms_available }} | {{room.rooms_available}} | {{ room.rooms_to_be_cleaned }}</li>
+                {% empty %}
+                <li>No rooms</li>
+                {% endfor %}
 </body>
