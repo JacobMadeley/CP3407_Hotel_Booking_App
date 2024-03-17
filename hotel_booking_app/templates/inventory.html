@@ -11,8 +11,9 @@
 <body>
     Hello
     <h3>Inventory Status</h3>
-                {% for room in Inventory %}
-                <li>{{ room.id }} | {{ room.rooms_available }} | {{room.rooms_available}} | {{ room.rooms_to_be_cleaned }}</li>
+                <li>Room ID | Is Available? | In Use? | Needs Cleaning?</li>
+                {% for room in rooms %}
+                <li>{{ room.id }} | {{ room.rooms_available }} | {{room.rooms_in_use}} | {{ room.rooms_to_be_cleaned }}</li>
                 {% empty %}
                 <li>No rooms</li>
                 {% endfor %}
