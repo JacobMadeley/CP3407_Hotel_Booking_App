@@ -1,1 +1,3 @@
-# JavaScript functions for webapp
+/**
+ * # JavaScript functions for webapp
+ */

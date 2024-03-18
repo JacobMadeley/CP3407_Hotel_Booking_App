@@ -1,1 +1,1 @@
-### This folder is for storeing images used in this project.
+### This folder is for storing images used in this project.

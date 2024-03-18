@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CP3407_Hotel_Booking_App.iml" filepath="$PROJECT_DIR$/.idea/CP3407_Hotel_Booking_App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/djangoModule/djangoModule.iml" filepath="$PROJECT_DIR$/djangoModule/djangoModule.iml" />
     </modules>
   </component>
 </project>

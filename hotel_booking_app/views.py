@@ -17,7 +17,8 @@ def user(request):
 
 
 def contact(request):
-  return render(request, "contact.html")
+    return render(request, "contact.html")
+
 
 def inventory(request):
     rooms = Inventory.objects.all().values()

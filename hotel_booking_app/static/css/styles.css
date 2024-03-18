@@ -1,9 +1,9 @@
-# CSS stylesheet for app
-navbar { 
+/*CSS stylesheet for app*/
+nav {
       width: 100%; 
-      margin:0px 0; 
+      margin:0 0;
     } 
-        navbar ul{ 
+        nav ul{
       width: 100%; 
       list-style: none; 
       margin: 0; 
@@ -11,11 +11,11 @@ navbar {
       overflow: hidden; 
     } 
   
-    navbar ul li{ 
+    nav ul li{
       width: 33%; 
       float: left; 
     } 
-        navbar ul li a{ 
+        nav ul li a{
       text-decoration: none; 
       color: rgb(0, 0, 0); 
       text-align: center; 
@@ -25,20 +25,14 @@ navbar {
       background-color: rgb(160, 236, 145); 
     } 
   
-    navbar ul li a:hover { 
+    nav ul li a:hover {
       background-color: rgb(11, 221, 29); 
     } 
   
-  .dashboard{ 
-    margin-right: 5%; 
-    margin-top: 15px; 
-    margin-left: 15px; 
-    margin-bottom: 15px; 
-    padding-top: 15px; 
-    padding-left: 15px; 
-    padding-right: 5px; 
-    padding-bottom: 15px; 
-    border-radius: 10px; 
+  .dashboard{
+      margin: 15px 5% 15px 15px;
+      padding: 15px 5px 15px 15px;
+      border-radius: 10px;
     box-shadow: 15px 15px 15px black; 
     text-align: justify; 
     color: white; 

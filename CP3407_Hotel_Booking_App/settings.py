@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'CP3407_Hotel_Booking_App.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'BASE_DIR',
-        'USER': 'user',
-        'PASSWORD': '1234',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hotel_booking_app',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '5432',
     }
