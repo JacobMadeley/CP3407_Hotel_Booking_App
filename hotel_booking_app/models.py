@@ -143,3 +143,7 @@ class Payment(models.Model):
     def __str__(self):
         return (f"Payment ID:{self.payment_id}, Date:{self.payment_date}, Booking ID:{self.booking_id}, "
                 f"Guest ID:{self.guest_id}")
+
+
+class Inventory:
+    pass
