@@ -146,4 +146,16 @@ class Payment(models.Model):
 
 
 class Inventory:
-    pass
+         inventory_status = models.AutoField(primary_key=True)
+         = models.CharField(max_length=20)
+         = models.CharField(max_length=20)
+        hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+        room = models.ForeignKey('RoomType', on_delete=models.CASCADE)
+        booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='room_booking')
+
+        class Meta:
+            db_table = 'room'
+
+        def __str__(self):
+            return (f"Inventory_status:{self.inventory_status}, Room Number:{self.room_id}, Guest ID:{self.guest_id}, "
+                    f"Booking ID:{self.inventory_status}")
