@@ -28,7 +28,15 @@
         <div class="content">
           <div class="card">
             <h1>Hotel Booking Contact</h1>
-            </table>
+                {% if not empty %}
+                    <li>Contact Name| Contact Number | Availability </li>
+                    {% for room in rooms %}
+                    <li>{{ contact.id }} | {{ contact.contact_number }} | {{contact.Availability}}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No rooms</li>
+                {% endif %}
+
           </div>
         </div>
       </div>
