@@ -1,101 +1,49 @@
-
-{% include 'navbar.html' %} 
+{% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-        .card {
-            background-color: #f9f9f9;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .card h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #555;
-        }
-        .card p {
-            font-size: 16px;
-            color: #777;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .grid-item {
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .grid-item h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #555;
-        }
-        .grid-item p {
-            font-size: 16px;
-            color: #777;
-        }
-    </style>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Booking Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">  </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Hotel Booking Dashboard</h1>
-        <div class="grid-container">
-            <div class="grid-item">
-                <h3>Recent Bookings</h3>
-                <ul>
-                    {% for booking in bookings %}
-                    <li>{{ booking.guest_name }} - Room: {{ booking.room.room_number }}</li>
-                    {% empty %}
-                    <li>No recent bookings found.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="grid-item">
-                <h3>Available Rooms</h3>
-                <ul>
-                    {% for room in rooms %}
-                    <li>Room: {{ room.room_number }} - Type: {{ room.room_type }} - Cost: ${{ room.room_cost }}</li>
-                    {% empty %}
-                    <li>No rooms available.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="grid-item">
-                <h3>Inventory Status</h3>
-                <p>Available Rooms: {{ inventory.rooms_available }}</p>
-                <p>Rooms in Use: {{ inventory.rooms_in_use }}</p>
-                <p>Rooms to be Cleaned: {{ inventory.rooms_to_be_cleaned }}</p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="navbar">
+      Hotel Booking Dashboard
     </div>
+    <div class="sidebar">
+      <h2>Side Navigation</h2>
+      <ul>
+        <li><a href="#bookings">Bookings</a></li>
+        <li><a href="#users">Users</a></li>
+        <li><a href="#inventory">Inventory</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#rates">Rates</a></li>
+        <li><a href="#reports">Reports</a></li>
+        <li><a href="#settings">Settings</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="card">
+        <h2>At a Glance Info</h2>
+        <p>Check-ins: {{ check_ins }}</p>
+        <p>Check-outs: {{ check_outs }}</p>
+        <p>Room Revenue: {{ room_revenue }}</p>
+        <p>Occupancy Rate: {{ occupancy_rate }}</p>
+        <p>Upcoming Reservations: {{ upcoming_reservations }}</p>
+      </div>
+      <div class="card">
+        <h2>Recent Activity</h2>
+        <ul>
+          {% for booking in recent_bookings %}
+          <li>{{ booking.guest.guest_first_name }} {{ booking.guest.guest_last_name }} - Room: {{ booking.room.room_number }}</li>
+          {% empty %}
+          <li>No recent bookings found.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

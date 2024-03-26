@@ -1,5 +1,5 @@
 /*CSS stylesheet for app*/
-nav {
+/*nav {
       width: 100%; 
       margin:0 0;
     } 
@@ -38,4 +38,75 @@ nav {
     color: white; 
     background-image: linear-gradient(rgb(129, 196, 235), rgb(5, 44, 151)); 
   } 
+  */
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .container {
+    display: grid;
+    grid-template-areas:
+      "navbar navbar"
+      "sidebar content";
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 250px 1fr;
+    height: 100vh;
+  }
+  .navbar {
+    grid-area: navbar;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+  }
+  .sidebar {
+    grid-area: sidebar;
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+  .content {
+    grid-area: content;
+    padding: 20px;
+  }
+  h1, h2, h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 5px;
+  }
+  a {
+    color: #333;
+  }
   
+  .center-navbar {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .center-navbar ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .center-navbar li {
+    margin: 0 10px;
+  }

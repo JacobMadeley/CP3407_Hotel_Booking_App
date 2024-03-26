@@ -1,10 +1,57 @@
+{% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Booking Bookings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <div class="container">
+        <div class="navbar">
+          Hotel Booking Bookings
+        </div>
+        <div class="sidebar">
+          <h2>Side Navigation</h2>
+          <ul>
+            <li><a href="#bookings">Bookings</a></li>
+            <li><a href="#users">Users</a></li>
+            <li><a href="#inventory">Inventory</a></li>
+            <li><a href="#rooms">Rooms</a></li>
+            <li><a href="#rates">Rates</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li><a href="#settings">Settings</a></li>
+          </ul>
+        </div>
+        <div class="content">
+          <div class="card">
+            <h1>Bookings</h1>
+            <table>
+              <tr>
+                <th>Booking ID</th>
+                <th>Room ID</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Guests</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+              {% for booking in bookings %}
+              <tr>
+                <td>{{ booking.booking_id }}</td>
+                <td>{{ booking.room_id }}</td>
+                <td>{{ booking.check_in }}</td>
+                <td>{{ booking.check_out }}</td>
+                <td>{{ booking.guests }}</td>
+                <td>{{ booking.price }}</td>
+                <td>{{ booking.status }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
 </body>
 </html>
