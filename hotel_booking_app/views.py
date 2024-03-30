@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.template import loader
+from .forms import BookingForm
 #from .models import Inventory
 
 # Create your views here.
@@ -31,3 +33,19 @@ def inventory(request):
 
 def users(request):
     return render(request, "users.html")
+
+def make_booking(request):
+    if request.method =='POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['your_name']
+            start = form.cleaned_data['start_date']
+            end = form.cleaned_data['end_date']
+            print(name)
+            print(start)
+            print(end)
+            return HttpResponseRedirect('/')
+    else:
+        form = BookingForm()
+        
+    return render(request, 'make_booking.html', {'form': form})
