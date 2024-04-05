@@ -55,3 +55,6 @@ def make_booking(request):
         form = BookingForm()
         
     return render(request, 'make_booking.html', {'form': form})
+
+def payments(request):
+    return render(request, "payments.html")
