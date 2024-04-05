@@ -6,6 +6,10 @@ from .forms import BookingForm
 from .models import Guest
 from .models import Hotel
 from .models import Booking
+from .models import Inventory
+from .models import Room
+from .models import RoomType
+
 # Create your views here.
 def dashboard(request):
     # return render(request, "dashboard.html")
@@ -34,8 +38,13 @@ def inventory(request):
     #context = {
     #'rooms': rooms,
     #}
-    return render(request, "inventory.html")
-    #return HttpResponse(template.render(context, request))
+
+    inventorys = Inventory.objects.all()
+    rooms = Room.objects.all()
+    roomtypes = RoomType.objects.all()
+    return render(request, 'inventory.html', 
+    {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes})
+
 
 def users(request):
     return render(request, "users.html")

@@ -113,7 +113,7 @@ class Room(models.Model):
 class RoomType(models.Model):
     room_type_name = models.CharField(max_length=50, primary_key=True)
     room_type_description = models.TextField()
-    room_type_images = models.FileField()
+    room_type_images = models.ImageField(null = True, blank = True, upload_to = 'images/')
     room_type_price = models.DecimalField(max_digits=20, decimal_places=2)
 
     class Meta:
