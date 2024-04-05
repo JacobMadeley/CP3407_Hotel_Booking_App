@@ -26,21 +26,47 @@
     </div>
     <div class="content">
       <div class="card">
-        <h2>At a Glance Info</h2>
-        <p>Check-ins: {{ check_ins }}</p>
-        <p>Check-outs: {{ check_outs }}</p>
-        <p>Room Revenue: {{ room_revenue }}</p>
-        <p>Occupancy Rate: {{ occupancy_rate }}</p>
-        <p>Upcoming Reservations: {{ upcoming_reservations }}</p>
-      </div>
-      <div class="card">
-        <h2>Recent Activity</h2>
+        <h2>Hotel Information</h2>
         <ul>
-          {% for booking in recent_bookings %}
+          <!-- {% for booking in recent_bookings %}
           <li>{{ booking.guest.guest_first_name }} {{ booking.guest.guest_last_name }} - Room: {{ booking.room.room_number }}</li>
           {% empty %}
           <li>No recent bookings found.</li>
-          {% endfor %}
+          {% endfor %} -->
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Hotel Name</th>
+                <th scope="col">Hotel Adress</th>
+                <th scope="col">Hotel City</th>
+                <th scope="col">Hotel Postcode</th>
+                <th scope="col">Hotel Country</th>
+                <th scope="col">Hotel Phone Number</th>
+                <th scope="col">Hotel Star Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+                {% if hotels %}
+            {% for hotel in hotels %}
+            <tr>
+              <td>{{ hotel.hotel_name }} </td>
+              <td>{{ hotel.hotel_address }}</td>
+              <td>{{ hotel.hotel_city }}</td>
+              <td>{{ hotel.hotel_postcode}}</td>
+              <td>{{ hotel.hotel_country}}</td>
+              <td>{{ hotel.hotel_phone_number}}</td>
+              <td>{{ hotel.hotel_star_rating}}</td>
+            </tr>
+            {% empty %}
+            
+            {% endfor %}
+            {% endif %}
+            
+            </tbody>
+          </table>
+          
         </ul>
       </div>
     </div>
