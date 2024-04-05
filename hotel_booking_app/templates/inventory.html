@@ -1,9 +1,11 @@
-
-<!-- {% load <images>} -->
-
-  {% include 'navbar.html' %}
+{% extends 'base.html' %}
+{% block content %}
 
 
+
+{% if user.is_authenticated %}
+
+{% else %}
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -17,18 +19,6 @@
       <div class="container">
           <div class="navbar">
             Hotel Booking Inventory
-          </div>
-          <div class="sidebar">
-            <h2>Side Navigation</h2>
-            <ul>
-              <li><a href="#bookings">Bookings</a></li>
-              <li><a href="#users">Users</a></li>
-              <li><a href="#inventory">Inventory</a></li>
-              <li><a href="#rooms">Rooms</a></li>
-              <li><a href="#rates">Rates</a></li>
-              <li><a href="#reports">Reports</a></li>
-              <li><a href="#settings">Settings</a></li>
-            </ul>
           </div>
           <div class="content">
             <div class="card">
@@ -62,3 +52,6 @@
   </body>
   </html>
   
+  {% endif %}
+
+  {% endblock %}

@@ -1,4 +1,9 @@
-{% include 'navbar.html' %}
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,21 +15,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="navbar">
-          Hotel Booking Bookings
-        </div>
-        <div class="sidebar">
-          <h2>Side Navigation</h2>
-          <ul>
-            <li><a href="#bookings">Bookings</a></li>
-            <li><a href="#users">Users</a></li>
-            <li><a href="#inventory">Inventory</a></li>
-            <li><a href="#rooms">Rooms</a></li>
-            <li><a href="#rates">Rates</a></li>
-            <li><a href="#reports">Reports</a></li>
-            <li><a href="#settings">Settings</a></li>
-          </ul>
-        </div>
+        
         <div class="content">
           <div class="card">
             <h1>Bookings</h1>
@@ -55,3 +46,27 @@
       </div>
 </body>
 </html>
+
+{% else %}
+
+<div class="col-md-6 offset-md-3">
+<h1>Login</h1>
+<br/>
+
+<form method="POST" action="{% url 'home' %}">
+	{% csrf_token %}
+
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username", placeholder="Username" required>
+    
+  </div><br/>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password", placeholder="Password" required>
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-secondary">Login</button>
+
+</form>
+{% endif %}
+
+{% endblock %}
