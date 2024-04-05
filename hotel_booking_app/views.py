@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
 from .forms import BookingForm
-#from .models import Inventory
+from .models import Booking
 
 # Create your views here.
 def dashboard(request):
@@ -20,6 +20,9 @@ def user(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+def payments(request):
+    return render(request, "payments.html")
 
 
 def inventory(request):
@@ -41,10 +44,21 @@ def make_booking(request):
             name = form.cleaned_data['your_name']
             start = form.cleaned_data['start_date']
             end = form.cleaned_data['end_date']
+            adults = form.cleaned_data['adults_number']
+            children = form.cleaned_data['children_number']
             print(name)
             print(start)
             print(end)
-            return HttpResponseRedirect('/')
+            print(adults)
+            print(children)
+            booking_request = Booking(booking_check_in = start, booking_check_out = end, booking_number_of_adults = adults, booking_number_of_children = children, guest = name, )
+            try:
+                booking_request.save()
+            except:
+                print('booking failed')
+                
+            Booking.objects.all().values()
+            return HttpResponseRedirect('/payments')
     else:
         form = BookingForm()
         
