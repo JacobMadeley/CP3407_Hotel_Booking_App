@@ -57,7 +57,7 @@ class Booking(models.Model):
     booking_number_of_adults = models.IntegerField()
     booking_number_of_children = models.IntegerField()
     booking_special_requests = models.TextField()
-    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='guest_bookings')
+    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='guest_bookings', null=True, blank=True)
     room = models.ForeignKey('Room', on_delete=models.CASCADE, related_name='room_bookings')
     payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='payment_bookings')
 
@@ -82,7 +82,7 @@ class Guest(models.Model):
     guest_state = models.CharField(max_length=50)
     guest_country = models.CharField(max_length=50)
     guest_postcode = models.CharField(max_length=10)
-    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='guest_booking')
+    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='guest_booking', null=True, blank=True)
     payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='guest_payment')
 
     class Meta:
@@ -113,7 +113,7 @@ class Room(models.Model):
 class RoomType(models.Model):
     room_type_name = models.CharField(max_length=50, primary_key=True)
     room_type_description = models.TextField()
-    room_type_images = models.ImageField(null = True, blank = True, upload_to = 'images/')
+    room_type_images = models.ImageField(null=True, blank=True, upload_to='images/')
     room_type_price = models.DecimalField(max_digits=20, decimal_places=2)
 
     class Meta:
@@ -150,6 +150,7 @@ class Inventory(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     room = models.ForeignKey('RoomType', on_delete=models.CASCADE)
     booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='inventory_booking')
+    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='inventory_guest')
 
     class Meta:
         db_table = 'inventory'  # changed from 'room' to 'inventory'
