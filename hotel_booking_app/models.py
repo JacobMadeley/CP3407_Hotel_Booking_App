@@ -148,9 +148,9 @@ class Payment(models.Model):
 class Inventory(models.Model):
     inventory_status = models.AutoField(primary_key=True)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    room = models.ForeignKey('RoomType', on_delete=models.CASCADE)
-    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='inventory_booking')
-    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='inventory_guest')
+    room = models.ForeignKey('RoomType', on_delete=models.CASCADE, default=None)
+    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='inventory_booking', default=None)
+    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='inventory_guest', default=None)
 
     class Meta:
         db_table = 'inventory'  # changed from 'room' to 'inventory'
