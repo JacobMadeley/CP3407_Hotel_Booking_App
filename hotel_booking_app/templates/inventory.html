@@ -4,7 +4,13 @@
 
 
 {% if user.is_authenticated %}
-
+<body>
+  <form action="/addroomtype/" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit">
+  </form>
+</body>
 {% else %}
   <!DOCTYPE html>
   <html lang="en">

@@ -13,6 +13,7 @@ from .models import RoomType
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .forms import AddRoomType
 
 # Create your views here.
 
@@ -93,13 +94,26 @@ def inventory(request):
     #context = {
     #'rooms': rooms,
     #}
+    if request.method =='POST':
+        form = AddRoomType(request.POST)
+        if form.is_valid():
+            room_type_name = form.cleaned_data['room_type_name']
+            room_type_description = form.cleaned_data['room_type_description']
+            room_type_price = form.cleaned_data['room_type_price']
+            image_url = form.cleaned_data['room_image_url']
+            print(room_type_name)
+            print(room_type_description)
+            print(room_type_price)
+            room_type = RoomType(room_type_name = room_type_name, room_type_description = room_type_description, room_type_images = image_url, room_type_price = room_type_price)
+            room_type.save()
+    else:
+        form = AddRoomType()
 
     inventorys = Inventory.objects.all()
     rooms = Room.objects.all()
     roomtypes = RoomType.objects.all()
     return render(request, 'inventory.html', 
-    {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes})
-
+    {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes, 'form': form})
 
 def users(request):
     return render(request, "users.html")
@@ -118,7 +132,7 @@ def make_booking(request):
             print(end)
             print(adults)
             print(children)
-            booking_request = Booking(booking_check_in = start, booking_check_out = end, booking_number_of_adults = adults, booking_number_of_children = children, guest = name, )
+            booking_request = Booking(booking_check_in = start, booking_check_out = end, booking_number_of_adults = adults, booking_number_of_children = children)
             try:
                 booking_request.save()
             except:

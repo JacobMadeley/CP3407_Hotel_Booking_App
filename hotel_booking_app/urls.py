@@ -17,5 +17,6 @@ urlpatterns = [
     path("inventory/", views.inventory, name="inventory"),
     path("users/", views.users, name="users"),
     path("makebooking/", views.make_booking, name="make_booking"),
-    path("payments/", views.payments, name="payments")
+    path("payments/", views.payments, name="payments"),
+    path("addroomtype/", views.inventory, name="inventory")
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
