@@ -99,15 +99,12 @@ class Room(models.Model):
     room_status = models.CharField(max_length=20)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
-    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, null=True, blank=True)
-    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='room_booking', null=True, blank=True)
 
     class Meta:
         db_table = 'room'
 
     def __str__(self):
-        return (f"Room Id:{self.room_id}, Room Status:{self.room_status}, Guest ID:{self.guest_id}, "
-                f"Booking ID:{self.booking_id}")
+        return f"Room Id:{self.room_id}, Room Status:{self.room_status}"
 
 
 class RoomType(models.Model):
@@ -148,7 +145,7 @@ class Payment(models.Model):
 class Inventory(models.Model):
     inventory_status = models.AutoField(primary_key=True)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    room = models.ForeignKey('RoomType', on_delete=models.CASCADE, default=None)
+    room = models.ForeignKey('Room', on_delete=models.CASCADE, default=None)
     booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='inventory_booking', default=None)
     guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='inventory_guest', default=None)
 
