@@ -58,8 +58,8 @@ class Booking(models.Model):
     booking_number_of_children = models.IntegerField()
     booking_special_requests = models.TextField()
     guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='guest_bookings', null=True, blank=True)
-    room = models.ForeignKey('Room', on_delete=models.CASCADE, related_name='room_bookings')
-    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='payment_bookings')
+    room = models.ForeignKey('Room', on_delete=models.CASCADE, related_name='room_bookings', null=True, blank=True)
+    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='payment_bookings', null=True, blank=True)
 
     class Meta:
         db_table = 'booking'
@@ -83,7 +83,7 @@ class Guest(models.Model):
     guest_country = models.CharField(max_length=50)
     guest_postcode = models.CharField(max_length=10)
     booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='guest_booking', null=True, blank=True)
-    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='guest_payment')
+    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='guest_payment', null=True, blank=True)
 
     class Meta:
         db_table = 'guest'
@@ -99,8 +99,8 @@ class Room(models.Model):
     room_status = models.CharField(max_length=20)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
-    guest = models.ForeignKey('Guest', on_delete=models.CASCADE)
-    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='room_booking')
+    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, null=True, blank=True)
+    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='room_booking', null=True, blank=True)
 
     class Meta:
         db_table = 'room'
@@ -134,8 +134,8 @@ class Payment(models.Model):
     payment_for_late_check_out = models.DecimalField(max_digits=20, decimal_places=2)
     payment_for_miscellaneous = models.DecimalField(max_digits=20, decimal_places=2)
     payment_for_miscellaneous_description = models.TextField()
-    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='payment_booking')
-    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='payment_guest')
+    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='payment_booking', null=True, blank=True)
+    guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='payment_guest', null=True, blank=True)
 
     class Meta:
         db_table = 'payment'
