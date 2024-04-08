@@ -2,6 +2,8 @@ from django import forms
 import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Hotel
+from .models import RoomType
 # from .models import Record
 
 
@@ -17,6 +19,14 @@ class AddRoomType(forms.Form):
     room_type_description = forms.CharField(label='description', max_length=150)
     room_type_price = forms.IntegerField(label='price', max_value=1000)
     room_image_url = forms.URLField(label='Image URL')
+    
+class AddRoom(forms.Form):
+    room_number = forms.IntegerField(label='room number')
+    room_status = forms.CharField(label='room status', max_length=100)
+    #hotel = forms(Hotel, on_delete=models.CASCADE)
+    #room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
+    hotel = forms.ModelChoiceField(label= 'hotel', queryset=Hotel.objects, required=False)
+    room_type = forms.ModelChoiceField(label='room type', queryset=RoomType.objects, required=False)
 
 
 class SignUpForm(UserCreationForm):

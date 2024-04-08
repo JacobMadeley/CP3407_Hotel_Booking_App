@@ -14,6 +14,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
 from .forms import AddRoomType
+from .forms import AddRoom
 
 # Create your views here.
 
@@ -113,7 +114,28 @@ def inventory(request):
     rooms = Room.objects.all()
     roomtypes = RoomType.objects.all()
     return render(request, 'inventory.html', 
-    {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes, 'form': form})
+    {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes, 'form': form, 'form2':AddRoom()})
+
+def add_room(request):
+    
+    if request.method == 'POST':
+        form = AddRoom(request.POST)
+        if form.is_valid():
+            room_num = form.cleaned_data['room_number']
+            room_status = form.cleaned_data['room_status']
+            hotel = form.cleaned_data['hotel']
+            room_type = form.cleaned_data['room_type']
+            
+            room = Room(room_number = str(room_num), room_status = room_status, hotel = hotel, room_type = room_type)
+            room.save()
+            
+    form = AddRoomType()
+    form2 = AddRoom()
+    inventorys = Inventory.objects.all()
+    rooms = Room.objects.all()
+    roomtypes = RoomType.objects.all()
+    return render(request, 'inventory.html', 
+    {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes, 'form': form,'form2':form2})
 
 def users(request):
     return render(request, "users.html")
