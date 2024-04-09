@@ -16,6 +16,7 @@ from .forms import SignUpForm
 from .forms import AddRoomType
 from .forms import AddRoom
 from .forms import PaymentForm
+from .forms import AddRecordForm
 # Create your views here.
 
 
@@ -66,6 +67,20 @@ def register_user(request):
 		return render(request, 'register.html', {'form':form})
 
 	return render(request, 'register.html', {'form':form})
+
+def add_record(request):
+	form = AddRecordForm(request.POST or None)
+	if request.user.is_authenticated:
+		if request.method == "POST":
+			if form.is_valid():
+				add_record = form.save()
+				messages.success(request, "Record Added...")
+				return redirect('dashboard')
+		return render(request, 'add_record.html', {'form':form})
+	else:
+		messages.success(request, "You Must Be Logged In...")
+		return redirect('dashboard')
+
 
 
 def dashboard(request):

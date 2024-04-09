@@ -20,5 +20,7 @@ urlpatterns = [
     path("payments/", views.payments, name="payments"),
     path("addroomtype/", views.inventory, name="inventory"),
     path("addroom/", views.add_room, name='inventory'),
-    path("payment/", views.payments, name='payments')
+    path("payment/", views.payments, name='payments'),
+    path('add_record/', views.add_record, name='add_record'),
+
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
