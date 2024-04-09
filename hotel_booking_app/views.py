@@ -15,7 +15,7 @@ from django.contrib import messages
 from .forms import SignUpForm
 from .forms import AddRoomType
 from .forms import AddRoom
-
+from .forms import PaymentForm
 # Create your views here.
 
 
@@ -161,11 +161,28 @@ def make_booking(request):
                 print('booking failed')
 
             Booking.objects.all().values()
-            return HttpResponseRedirect('/payments')
+            return HttpResponseRedirect('/payment/')
     else:
         form = BookingForm()
         
     return render(request, 'make_booking.html', {'form': form})
 
 def payments(request):
-    return render(request, "payments.html")
+    if request.method=='POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            payment_date = form.cleaned_data[payment_date]
+            payment_card_number = form.cleaned_data[payment_card_number]
+            payment_card_expiry_date = form.cleaned_data[payment_card_expiry_date]
+            payment_for_booking = form.cleaned_data[payment_for_booking]
+            payment_for_service = form.cleaned_data[payment_for_service]
+            payment_for_bar = form.cleaned_data[payment_for_bar]
+            payment_for_late_check_out = form.cleaned_data[payment_for_late_check_out]
+            payment_for_miscellaneous = form.cleaned_data[payment_for_miscellaneous]
+            payment_for_miscellaneous_description = form.cleaned_data[payment_for_miscellaneous_description]
+            booking = form.cleaned_data[booking]
+            guest = form.cleaned_data[guest]     
+    else:
+        form = PaymentForm()
+        
+    return render(request, "payments.html", {'form':form})

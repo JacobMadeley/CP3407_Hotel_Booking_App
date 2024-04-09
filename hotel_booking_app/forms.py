@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Hotel
 from .models import RoomType
+from .models import Booking
+from .models import Guest
+from django.utils import timezone
 # from .models import Record
 
 
@@ -27,6 +30,19 @@ class AddRoom(forms.Form):
     #room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
     hotel = forms.ModelChoiceField(label= 'hotel', queryset=Hotel.objects, required=False)
     room_type = forms.ModelChoiceField(label='room type', queryset=RoomType.objects, required=False)
+
+class PaymentForm(forms.Form):
+    payment_date = forms.DateField(label='date',initial=timezone.now)
+    payment_card_number = forms.CharField(label= 'Card Number')
+    payment_card_expiry_date = forms.DateField(label='Card Expiry')
+    #payment_for_booking = forms.DecimalField(max_digits=20, decimal_places=2)
+    #payment_for_service = forms.DecimalField(max_digits=20, decimal_places=2)
+    #payment_for_bar = forms.DecimalField(max_digits=20, decimal_places=2)
+    #payment_for_late_check_out = forms.DecimalField(max_digits=20, decimal_places=2)
+    #payment_for_miscellaneous = forms.DecimalField(max_digits=20, decimal_places=2)
+    #payment_for_miscellaneous_description = forms.CharField()
+    #booking = forms.ModelChoiceField(label= 'booking', queryset=Booking.objects)
+    #guest = forms.MultipleChoiceField(label= 'guest', queryset = Guest.objects)
 
 
 class SignUpForm(UserCreationForm):
