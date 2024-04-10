@@ -59,7 +59,8 @@ class Booking(models.Model):
     booking_special_requests = models.TextField()
     guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='guest_bookings', null=True, blank=True)
     room = models.ForeignKey('Room', on_delete=models.CASCADE, related_name='room_bookings', null=True, blank=True)
-    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='payment_bookings', null=True, blank=True)
+    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='payment_bookings', null=True, 
+                                blank=True)
 
     class Meta:
         db_table = 'booking'
@@ -82,8 +83,10 @@ class Guest(models.Model):
     guest_state = models.CharField(max_length=50)
     guest_country = models.CharField(max_length=50)
     guest_postcode = models.CharField(max_length=10)
-    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='guest_booking', null=True, blank=True)
-    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='guest_payment', null=True, blank=True)
+    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='guest_booking', null=True, 
+                                blank=True)
+    payment = models.ForeignKey('Payment', on_delete=models.CASCADE, related_name='guest_payment', null=True, 
+                                blank=True)
 
     class Meta:
         db_table = 'guest'
@@ -110,14 +113,15 @@ class Room(models.Model):
 class RoomType(models.Model):
     room_type_name = models.CharField(max_length=50, primary_key=True)
     room_type_description = models.TextField()
-    room_type_images = models.ImageField(null=True, blank=True, upload_to='images/')
+    room_type_images = models.ImageField(upload_to='./hotel_booking_app/static/img', null=True, blank=True)
     room_type_price = models.DecimalField(max_digits=20, decimal_places=2)
 
     class Meta:
         db_table = 'room_type'
 
     def __str__(self):
-        return f"Room Type:{self.room_type_name}, Description:{self.room_type_description}"
+        return (f"Room Type:{self.room_type_name}, Description:{self.room_type_description}, "
+                f"Description:{self.room_type_images}, Description:{self.room_type_price}")
 
 
 class Payment(models.Model):
@@ -131,7 +135,8 @@ class Payment(models.Model):
     payment_for_late_check_out = models.DecimalField(max_digits=20, decimal_places=2)
     payment_for_miscellaneous = models.DecimalField(max_digits=20, decimal_places=2)
     payment_for_miscellaneous_description = models.TextField()
-    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='payment_booking', null=True, blank=True)
+    booking = models.ForeignKey('Booking', on_delete=models.CASCADE, related_name='payment_booking', null=True, 
+                                blank=True)
     guest = models.ForeignKey('Guest', on_delete=models.CASCADE, related_name='payment_guest', null=True, blank=True)
 
     class Meta:
