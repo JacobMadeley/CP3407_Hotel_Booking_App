@@ -11,27 +11,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking Contact</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
 </head>
 <body>
     <div class="container">
         <div class="navbar">
-          Hotel Booking Contact
         </div>
         <div class="content">
           <div class="card">
-            <h1>Hotel Booking Contact</h1>
+            <h1>Contact Details</h1>
                 {% if not empty %}
-                    <li>Contact Name| Contact Number | Availability </li>
-                    {% for room in rooms %}
-                    <li>{{ contact.id }} | {{ contact.contact_number }} | {{contact.Availability}}</li>
+                    
+                    {% for hotel in hotels %}
+                    <div class="card" style="width=device-width, initial-scale=1.0">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h3>Contact details</h3>
+                        <h5 class="card-title">{{ hotel.hotel_name }} hotel</h5> 
+                        <h5 class="card-title">{{ hotel.hotel_name }}@gmail.com</h5> 
+                        <p class="card-text">{{ hotel.hotel_phone_number }}</p>
+                        <p class="card-text">{{ hotel.hotel_address }} {{ hotel.hotel_city }},</p>
+                        <p class="card-text">{{ hotel.hotel_country }} {{ hotel.hotel_postcode }}</p>
+
+                        <h1></h1>
+                      </div>
+                    </div>
                     {% endfor %}
                 {% else %}
                     <li>No rooms</li>
                 {% endif %}
-
+                
           </div>
         </div>
       </div>

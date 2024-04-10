@@ -101,9 +101,8 @@ def user(request):
     # return render(request, 'user.html', {'users': users})
 
 def contact(request):
-
-    return render(request, "contact.html")
-
+    hotels = Hotel.objects.all()
+    return render(request, "contact.html", {'hotels': hotels})
 
 def inventory(request):
     #rooms = Inventory.objects.all().values()
