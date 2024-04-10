@@ -196,7 +196,14 @@ def make_booking(request):
 
 def payments(request):
     if request.method=='POST':
-        form = PaymentForm(request.POST)
+        guest_id = request.session.get('guest_id')
+        print(guest_id)
+
+        booking = Booking.objects.all()[guest_id[1]-1]
+        guest= Guest.objects.all()[guest_id[0]-1]
+        form = PaymentForm(initial={'booking':booking,'guest':guest})
+
+        form = PaymentForm(request.POST,initial={'booking':booking,'guest':guest})
         if form.is_valid():
             payment_date = form.cleaned_data['payment_date']
             
@@ -212,16 +219,17 @@ def payments(request):
             guest2 = form.cleaned_data['guest']
             payment = Payment(payment_date=payment_date, payment_card_number=payment_card_number, payment_card_expiry_date=payment_card_expiry_date, payment_for_booking=payment_for_booking, payment_for_service=payment_for_service, payment_for_bar=payment_for_bar, payment_for_late_check_out=payment_for_late_check_out, payment_for_miscellaneous=payment_for_miscellaneous, payment_for_miscellaneous_description=payment_for_miscellaneous_description, booking=booking2, guest = guest2)
             payment.save()
+            print(3)
             
     else:
-        guest_id = request.session.pop('guest_id',{})
+        guest_id = request.session.get('guest_id')
         print(guest_id)
         try:
             booking = Booking.objects.all()[guest_id[1]-1]
             guest= Guest.objects.all()[guest_id[0]-1]
             form = PaymentForm(initial={'booking':booking,'guest':guest})
         except:
-            HttpResponseRedirect('/make_booking/')
+            return HttpResponseRedirect('/make_booking/')
     try:        
         return render(request, "payments.html", {'form':form})
     except:

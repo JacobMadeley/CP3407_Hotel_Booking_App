@@ -52,8 +52,9 @@ class PaymentForm(forms.Form):
     payment_for_late_check_out = forms.DecimalField(label='late checkout',max_digits=20, decimal_places=2, disabled=True, initial=0)
     payment_for_miscellaneous = forms.DecimalField(label='misc costs',max_digits=20, decimal_places=2, disabled=True, initial=0)
     payment_for_miscellaneous_description = forms.CharField(label='misc cost description', disabled=True, initial='N/A')
-    booking = forms.ModelChoiceField(label= 'booking', queryset=Booking.objects, disabled=True)
-    guest = forms.ModelChoiceField(label= 'guest', queryset = Guest.objects, disabled=True)
+    booking = forms.ModelChoiceField(label= 'booking', queryset=Booking.objects, disabled=True, widget=forms.HiddenInput())
+    guest = forms.ModelChoiceField(label= 'guest', queryset = Guest.objects, disabled=True,widget=forms.HiddenInput())
+    
 
 
 class SignUpForm(UserCreationForm):

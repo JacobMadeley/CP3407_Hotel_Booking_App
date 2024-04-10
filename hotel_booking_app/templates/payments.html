@@ -4,6 +4,8 @@
 
 <form action="/payment/" method="post">
     {% csrf_token %}
+    {{form.booking}}
+    {{form.guest}}
     {{ form }}
     <input type="submit" value="Submit">
 </form>
