@@ -11,11 +11,22 @@ from django.utils import timezone
 
 
 class BookingForm(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
     start_date = forms.DateField(label='start date', initial=datetime.date.today)
     end_date = forms.DateField(label='end date', initial=datetime.date.today)
     adults_number = forms.IntegerField(label='Adults', max_value=10)
     children_number = forms.IntegerField(label='Children', max_value=10)
+    guest_title = forms.CharField(label= 'title',max_length=10)
+    guest_first_name = forms.CharField(label='first name',max_length=50)
+    guest_last_name = forms.CharField(label='last name',max_length=50)
+    guest_date_of_birth = forms.DateField(label='date of birth',initial=timezone.now)
+    guest_phone_number = forms.CharField(label='phone number',max_length=20)
+    guest_email = forms.EmailField(label='email')
+    guest_address = forms.CharField(label='address',max_length=50)
+    guest_city = forms.CharField(label='city',max_length=50)
+    guest_state = forms.CharField(label='state',max_length=50)
+    guest_country = forms.CharField(label='country',max_length=50)
+    guest_postcode = forms.CharField(label='postcode',max_length=10)
+
 
 class AddRoomType(forms.Form):
     room_type_name = forms.CharField(label='room type', max_length=100)
@@ -35,14 +46,14 @@ class PaymentForm(forms.Form):
     payment_date = forms.DateField(label='date',initial=timezone.now)
     payment_card_number = forms.CharField(label= 'Card Number')
     payment_card_expiry_date = forms.DateField(label='Card Expiry')
-    #payment_for_booking = forms.DecimalField(max_digits=20, decimal_places=2)
-    #payment_for_service = forms.DecimalField(max_digits=20, decimal_places=2)
-    #payment_for_bar = forms.DecimalField(max_digits=20, decimal_places=2)
-    #payment_for_late_check_out = forms.DecimalField(max_digits=20, decimal_places=2)
-    #payment_for_miscellaneous = forms.DecimalField(max_digits=20, decimal_places=2)
-    #payment_for_miscellaneous_description = forms.CharField()
-    #booking = forms.ModelChoiceField(label= 'booking', queryset=Booking.objects)
-    #guest = forms.MultipleChoiceField(label= 'guest', queryset = Guest.objects)
+    payment_for_booking = forms.DecimalField(label='booking cost',max_digits=20, decimal_places=2, disabled=True, initial=200)
+    payment_for_service = forms.DecimalField(label='service cost',max_digits=20, decimal_places=2, disabled=True, initial=50)
+    payment_for_bar = forms.DecimalField(label='bar tab',max_digits=20, decimal_places=2, disabled=True, initial=20)
+    payment_for_late_check_out = forms.DecimalField(label='late checkout',max_digits=20, decimal_places=2, disabled=True, initial=0)
+    payment_for_miscellaneous = forms.DecimalField(label='misc costs',max_digits=20, decimal_places=2, disabled=True, initial=0)
+    payment_for_miscellaneous_description = forms.CharField(label='misc cost description', disabled=True, initial='N/A')
+    booking = forms.ModelChoiceField(label= 'booking', queryset=Booking.objects, disabled=True)
+    guest = forms.ModelChoiceField(label= 'guest', queryset = Guest.objects, disabled=True)
 
 
 class SignUpForm(UserCreationForm):

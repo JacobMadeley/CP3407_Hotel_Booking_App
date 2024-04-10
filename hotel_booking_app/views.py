@@ -10,6 +10,7 @@ from .models import Booking
 from .models import Inventory
 from .models import Room
 from .models import RoomType
+from .models import Payment
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
@@ -159,21 +160,33 @@ def make_booking(request):
     if request.method =='POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['your_name']
             start = form.cleaned_data['start_date']
             end = form.cleaned_data['end_date']
             adults = form.cleaned_data['adults_number']
             children = form.cleaned_data['children_number']
-            print(name)
+            guest_title=form.cleaned_data['guest_title']
+            guest_first_name=form.cleaned_data['guest_first_name']
+            guest_last_name=form.cleaned_data['guest_last_name']
+            guest_date_of_birth=form.cleaned_data['guest_date_of_birth']
+            guest_phone_number=form.cleaned_data['guest_phone_number']
+            guest_email=form.cleaned_data['guest_email']
+            guest_address=form.cleaned_data['guest_address']
+            guest_city=form.cleaned_data['guest_city']
+            guest_state=form.cleaned_data['guest_state']
+            guest_country=form.cleaned_data['guest_country']
+            guest_postcode=form.cleaned_data['guest_postcode']
             print(start)
             print(end)
             print(adults)
             print(children)
             booking_request = Booking(booking_check_in = start, booking_check_out = end, booking_number_of_adults = adults, booking_number_of_children = children)
-            try:
-                booking_request.save()
-            except:
-                print('booking failed')
+            guest = Guest(guest_title=guest_title, guest_first_name=guest_first_name, guest_last_name=guest_last_name, guest_date_of_birth=guest_date_of_birth, guest_phone_number=guest_phone_number, guest_email=guest_email, guest_address=guest_address, guest_city=guest_city, guest_state=guest_state, guest_country=guest_country, guest_postcode=guest_postcode, booking=booking_request)
+            #try:
+            booking_request.save()
+            guest.save()
+            request.session['guest_id'] = [guest.guest_id,booking_request.booking_id]
+            #except:
+            #    print('booking failed')
 
             Booking.objects.all().values()
             return HttpResponseRedirect('/payment/')
@@ -186,18 +199,31 @@ def payments(request):
     if request.method=='POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
-            payment_date = form.cleaned_data[payment_date]
-            payment_card_number = form.cleaned_data[payment_card_number]
-            payment_card_expiry_date = form.cleaned_data[payment_card_expiry_date]
-            payment_for_booking = form.cleaned_data[payment_for_booking]
-            payment_for_service = form.cleaned_data[payment_for_service]
-            payment_for_bar = form.cleaned_data[payment_for_bar]
-            payment_for_late_check_out = form.cleaned_data[payment_for_late_check_out]
-            payment_for_miscellaneous = form.cleaned_data[payment_for_miscellaneous]
-            payment_for_miscellaneous_description = form.cleaned_data[payment_for_miscellaneous_description]
-            booking = form.cleaned_data[booking]
-            guest = form.cleaned_data[guest]     
+            payment_date = form.cleaned_data['payment_date']
+            
+            payment_card_number = form.cleaned_data['payment_card_number']
+            payment_card_expiry_date = form.cleaned_data['payment_card_expiry_date']
+            payment_for_booking = form.cleaned_data['payment_for_booking']
+            payment_for_service = form.cleaned_data['payment_for_service']
+            payment_for_bar = form.cleaned_data['payment_for_bar']
+            payment_for_late_check_out = form.cleaned_data['payment_for_late_check_out']
+            payment_for_miscellaneous = form.cleaned_data['payment_for_miscellaneous']
+            payment_for_miscellaneous_description = form.cleaned_data['payment_for_miscellaneous_description']
+            booking2 = form.cleaned_data['booking']
+            guest2 = form.cleaned_data['guest']
+            payment = Payment(payment_date=payment_date, payment_card_number=payment_card_number, payment_card_expiry_date=payment_card_expiry_date, payment_for_booking=payment_for_booking, payment_for_service=payment_for_service, payment_for_bar=payment_for_bar, payment_for_late_check_out=payment_for_late_check_out, payment_for_miscellaneous=payment_for_miscellaneous, payment_for_miscellaneous_description=payment_for_miscellaneous_description, booking=booking2, guest = guest2)
+            payment.save()
+            
     else:
-        form = PaymentForm()
-        
-    return render(request, "payments.html", {'form':form})
+        guest_id = request.session.pop('guest_id',{})
+        print(guest_id)
+        try:
+            booking = Booking.objects.all()[guest_id[1]-1]
+            guest= Guest.objects.all()[guest_id[0]-1]
+            form = PaymentForm(initial={'booking':booking,'guest':guest})
+        except:
+            HttpResponseRedirect('/make_booking/')
+    try:        
+        return render(request, "payments.html", {'form':form})
+    except:
+        return render(request, 'make_booking.html',{'form':BookingForm()})
