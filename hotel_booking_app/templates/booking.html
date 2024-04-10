@@ -1,72 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
-
-{% if user.is_authenticated %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking Bookings</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
-</head>
-<body>
-    <div class="container">
-        
-        <div class="content">
-          <div class="card">
-            <h1>Bookings</h1>
-            <table>
-              <tr>
-                <th>Booking ID</th>
-                <th>Room ID</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Guests</th>
-                <th>Price</th>
-                <th>Status</th>
-              </tr>
-              {% for booking in bookings %}
-              <tr>
-                <td>{{ booking.booking_id }}</td>
-                <td>{{ booking.room_id }}</td>
-                <td>{{ booking.check_in }}</td>
-                <td>{{ booking.check_out }}</td>
-                <td>{{ booking.guests }}</td>
-                <td>{{ booking.price }}</td>
-                <td>{{ booking.status }}</td>
-              </tr>
-              {% endfor %}
-            </table>
-          </div>
+    {% if user.is_authenticated %}
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Hotel Booking Bookings</title>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
+        </head>
+        <body>
+        <div class="container">
+            <div class="content">
+                <div class="card">
+                    <h1>Bookings</h1>
+                    <table>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Room ID</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Guests</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                        {% for booking in bookings %}
+                            <tr>
+                                <td>{{ booking.booking_id }}</td>
+                                <td>{{ booking.room_id }}</td>
+                                <td>{{ booking.check_in }}</td>
+                                <td>{{ booking.check_out }}</td>
+                                <td>{{ booking.guests }}</td>
+                                <td>{{ booking.price }}</td>
+                                <td>{{ booking.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-</body>
-</html>
-
-{% else %}
-
-<div class="col-md-6 offset-md-3">
-<h1>Login</h1>
-<br/>
-
-<form method="POST" action="{% url 'home' %}">
-	{% csrf_token %}
-
-  <div class="mb-3">
-    <input type="text" class="form-control" name="username", placeholder="Username" required>
-    
-  </div><br/>
-  <div class="mb-3">
-    <input type="password" class="form-control" name="password", placeholder="Password" required>
-  </div>
-  <br/>
-  <button type="submit" class="btn btn-secondary">Login</button>
-
-</form>
-{% endif %}
-
+        </body>
+        </html>
+    {% else %}
+        <div class="col-md-6 offset-md-3">
+            <h1>Login</h1>
+            <br/>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label>
+                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                    </label>
+                </div>
+                <br/>
+                <div class="mb-3">
+                    <label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </label>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-secondary">Login</button>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -1,96 +1,83 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% if user.is_authenticated %}
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Hotel Booking Dashboard</title>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
+        </head>
+        <body>
+        <div class="container">
+            <div class="navbar">
+                Hotel Booking Dashboard
+            </div>
+            <div class="content">
+                <div class="card">
+                    <h2>Hotel Information</h2>
+                    <ul>
+                        <!-- {% for booking in recent_bookings %}
+                        <li>{{ booking.guest.guest_first_name }} {{ booking.guest.guest_last_name }} - Room: {{ booking.room.room_number }}</li>
+                        {% empty %}
+                        <li>No recent bookings found.</li>
+                        {% endfor %} -->
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Hotel Name</th>
+                                    <th scope="col">Hotel Address</th>
+                                    <th scope="col">Hotel City</th>
+                                    <th scope="col">Hotel Postcode</th>
+                                    <th scope="col">Hotel Country</th>
+                                    <th scope="col">Hotel Phone Number</th>
+                                    <th scope="col">Hotel Star Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% if hotels %}
+                                {% for hotel in hotels %}
+                                    <tr>
+                                        <td>{{ hotel.hotel_name }} </td>
+                                        <td>{{ hotel.hotel_address }}</td>
+                                        <td>{{ hotel.hotel_city }}</td>
+                                        <td>{{ hotel.hotel_postcode }}</td>
+                                        <td>{{ hotel.hotel_country }}</td>
+                                        <td>{{ hotel.hotel_phone_number }}</td>
+                                        <td>{{ hotel.hotel_star_rating }}</td>
+                                    </tr>
+                                {% empty %}
 
-
-
-{% if user.is_authenticated %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hotel Booking Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">  </head>
-<body>
-  <div class="container">
-    <div class="navbar">
-      Hotel Booking Dashboard
-    </div>
-    
-    <div class="content">
-      <div class="card">
-        <h2>Hotel Information</h2>
-        <ul>
-          <!-- {% for booking in recent_bookings %}
-          <li>{{ booking.guest.guest_first_name }} {{ booking.guest.guest_last_name }} - Room: {{ booking.room.room_number }}</li>
-          {% empty %}
-          <li>No recent bookings found.</li>
-          {% endfor %} -->
-          
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Hotel Name</th>
-                <th scope="col">Hotel Adress</th>
-                <th scope="col">Hotel City</th>
-                <th scope="col">Hotel Postcode</th>
-                <th scope="col">Hotel Country</th>
-                <th scope="col">Hotel Phone Number</th>
-                <th scope="col">Hotel Star Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-            
-                {% if hotels %}
-            {% for hotel in hotels %}
-            <tr>
-              <td>{{ hotel.hotel_name }} </td>
-              <td>{{ hotel.hotel_address }}</td>
-              <td>{{ hotel.hotel_city }}</td>
-              <td>{{ hotel.hotel_postcode}}</td>
-              <td>{{ hotel.hotel_country}}</td>
-              <td>{{ hotel.hotel_phone_number}}</td>
-              <td>{{ hotel.hotel_star_rating}}</td>
-            </tr>
-            {% empty %}
-            
-            {% endfor %}
-            {% endif %}
-            
-            </tbody>
-          </table>
-          
-        </ul>
-      </div>
-    </div>
-    <!-- <button type="submit" class="btn btn-secondary">Add Record</button> -->
-    <a href="{% url 'add_record' %}" class="btn btn-secondary">Add Record</a>
-  </div>
-</body>
-</html>
-
-
-{% else %}
-
-<div class="col-md-6 offset-md-3">
-<h1>Login</h1>
-<br/>
-
-<form method="POST" action="{% url 'home' %}">
-	{% csrf_token %}
-
-  <div class="mb-3">
-    <input type="text" class="form-control" name="username", placeholder="Username" required>
-    
-  </div><br/>
-  <div class="mb-3">
-    <input type="password" class="form-control" name="password", placeholder="Password" required>
-  </div>
-  <br/>
-  <button type="submit" class="btn btn-secondary">Login</button>
-
-</form>
-{% endif %}
-
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </ul>
+                </div>
+            </div>
+            <!-- <button type="submit" class="btn btn-secondary">Add Record</button> -->
+            <a href="{% url 'add_record' %}" class="btn btn-secondary">Add Record</a>
+        </div>
+        </body>
+        </html>
+    {% else %}
+        <div class="col-md-6 offset-md-3">
+        <h1>Login</h1>
+        <br/>
+        <form method="POST" action="{% url 'home' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
+            </div>
+            <br/>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" , placeholder="Password" required>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-secondary">Login</button>
+        </form>
+    {% endif %}
 {% endblock %}
