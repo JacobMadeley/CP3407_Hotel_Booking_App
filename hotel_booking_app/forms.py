@@ -36,7 +36,7 @@ class AddRoomType(forms.Form):
     
 class AddRoom(forms.Form):
     room_number = forms.IntegerField(label='room number')
-    room_status = forms.CharField(label='room status', max_length=100)
+    room_status = forms.ChoiceField(label='room status', choices=[(1,'occupied'), (2,'free'),(3,'needs cleaning'), (4,'needs maintenance')])
     #hotel = forms(Hotel, on_delete=models.CASCADE)
     #room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
     hotel = forms.ModelChoiceField(label= 'hotel', queryset=Hotel.objects, required=False)
