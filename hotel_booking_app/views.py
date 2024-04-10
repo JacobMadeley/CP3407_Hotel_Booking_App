@@ -112,7 +112,7 @@ def inventory(request):
     #'rooms': rooms,
     #}
     if request.method =='POST':
-        form = AddRoomType(request.POST)
+        form = AddRoomType(request.POST, request.FILES)
         if form.is_valid():
             room_type_name = form.cleaned_data['room_type_name']
             room_type_description = form.cleaned_data['room_type_description']

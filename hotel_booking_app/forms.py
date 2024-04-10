@@ -32,7 +32,7 @@ class AddRoomType(forms.Form):
     room_type_name = forms.CharField(label='room type', max_length=100)
     room_type_description = forms.CharField(label='description', max_length=150)
     room_type_price = forms.IntegerField(label='price', max_value=1000)
-    room_image_url = forms.URLField(label='Image URL')
+    room_image_url = forms.ImageField(label='Image')
     
 class AddRoom(forms.Form):
     room_number = forms.IntegerField(label='room number')

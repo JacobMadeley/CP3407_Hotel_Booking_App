@@ -5,7 +5,7 @@
 
 {% if user.is_authenticated %}
 <body>
-  <form action="/addroomtype/" method="post">
+  <form enctype="multipart/form-data" action="/addroomtype/" method="post">
       {% csrf_token %}
       {{ form }}
       <input type="submit" value="Submit">
