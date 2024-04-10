@@ -32,12 +32,12 @@ def home(request):
 		if user is not None:
 			login(request, user)
 			messages.success(request, "You Have Been Logged In!")
-			return redirect('home')
+			return redirect('dashboard')
 		else:
 			messages.success(request, "There Was An Error Logging In, Please Try Again...")
-			return redirect('home')
+			return redirect('dashboard')
 	else:
-		return render(request, 'home.html')
+		return render(request, 'dashboard.html')
 
 
 
