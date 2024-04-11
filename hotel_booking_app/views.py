@@ -70,7 +70,7 @@ def register_user(request):
 	return render(request, 'register.html', {'form':form})
 
 def add_record(request):
-	form = AddRecordForm(request.POST or None)
+	form = AddRecordForm(request.POST, request.FILES)
 	if request.user.is_authenticated:
 		if request.method == "POST":
 			if form.is_valid():
@@ -81,28 +81,6 @@ def add_record(request):
 	else:
 		messages.success(request, "You Must Be Logged In...")
 		return redirect('dashboard')
-
-
-
-def dashboard(request):
-    # return render(request, "dashboard.html")
-    hotels = Hotel.objects.all()
-    return render(request, 'dashboard.html', {'hotels': hotels})
-
-
-def booking(request):
-    return render(request, "booking.html")
-
-
-def user(request):
-    return render(request, "user.html")
-    #
-    # users = Guest.objects.all()
-    # return render(request, 'user.html', {'users': users})
-
-def contact(request):
-    hotels = Hotel.objects.all()
-    return render(request, "contact.html", {'hotels': hotels})
 
 def inventory(request):
     #rooms = Inventory.objects.all().values()
@@ -131,6 +109,29 @@ def inventory(request):
     return render(request, 'inventory.html', 
     {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes, 'form': form, 'form2':AddRoom()})
 
+def dashboard(request):
+    # return render(request, "dashboard.html")
+    hotels = Hotel.objects.all()
+    return render(request, 'dashboard.html', {'hotels': hotels})
+
+
+def booking(request):
+    return render(request, "booking.html")
+
+
+def user(request):
+    return render(request, "user.html")
+    #
+    # users = Guest.objects.all()
+    # return render(request, 'user.html', {'users': users})
+
+def contact(request):
+    hotels = Hotel.objects.all()
+    return render(request, "contact.html", {'hotels': hotels})
+
+
+
+
 def add_room(request):
     
     if request.method == 'POST':
@@ -146,11 +147,12 @@ def add_room(request):
             
     form = AddRoomType()
     form2 = AddRoom()
+    hotels = Hotel.objects.all()
     inventorys = Inventory.objects.all()
     rooms = Room.objects.all()
     roomtypes = RoomType.objects.all()
     return render(request, 'inventory.html', 
-    {'inventorys': inventorys, 'rooms': rooms, 'roomtypes': roomtypes, 'form': form,'form2':form2})
+    {'inventorys': inventorys, 'rooms': rooms,'hotels': hotels, 'roomtypes': roomtypes, 'form': form,'form2':form2})
 
 def users(request):
     return render(request, "users.html")

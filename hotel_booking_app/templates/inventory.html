@@ -44,14 +44,13 @@
                   {% endif %} -->
                   {% if not empty %}
                       <li>Room ID | Is Available? | In Use? | Needs Cleaning?</li>
-                      {% for room_type in room_types %}
-                      <li>{{ room_type.room_type_name }} {{room_type.room_type_images}}</li>
-                      <li><img src ="{{ room_type.room_type_images.url }}"></li>
-            
-                      
+                      {% for roomtype in roomtypes %}
+                      <li>{{ roomtype.room_type_name }} {{roomtype.room_type_images}}</li>
+                      <li><img src ="{{ roomtype.room_type_images.url }}"></li>
                       {% endfor %}
-                      {% if room_type.room_type_images %}
-                        <img src ="{{ post.room_type.room_type_images.url }}" alt="Room image">
+                      {% if roomtype.room_type_images %}
+                        <img src ="{{ post.roomtype.room_type_images.url }}">
+
                       {% endif %}
                   {% else %}
                       <li>No rooms</li>

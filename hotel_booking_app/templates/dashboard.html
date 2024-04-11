@@ -14,7 +14,15 @@
         <div class="container">
             <div class="navbar">
                 Hotel Booking Dashboard
-                <img src="/hotel_booking_app/static/images/hotel_logo.png" alt="Hotel logo">
+                {% if not empty %}
+                {% for hotel in hotels %}
+                {% endfor %}
+                {% if hotel.hotel_logo %}
+                  <img src ="{{ post.hotel.hotel_logo.url }}">
+                {% endif %}
+            {% else %}
+                <li>No rooms</li>
+            {% endif %}
             </div>
             <div class="content">
                 <div class="card">
@@ -30,7 +38,6 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Hotel Name</th>
-                                    <th scope="col">Hotel Logo</th>
                                     <th scope="col">Hotel Address</th>
                                     <th scope="col">Hotel City</th>
                                     <th scope="col">Hotel Postcode</th>
@@ -44,7 +51,8 @@
                                 {% for hotel in hotels %}
                                     <tr>
                                         <td>{{ hotel.hotel_name }} </td>
-                                        <td><img src="{{ hotel.hotel_logo }}" alt="Hotel Logo" width="100" height="100"></td>
+                                        
+
                                         <td>{{ hotel.hotel_address }}</td>
                                         <td>{{ hotel.hotel_city }}</td>
                                         <td>{{ hotel.hotel_postcode }}</td>
