@@ -14,15 +14,6 @@
         <div class="container">
             <div class="navbar">
                 Hotel Booking Dashboard
-                {% if not empty %}
-                {% for hotel in hotels %}
-                {% endfor %}
-                {% if hotel.hotel_logo %}
-                  <img src ="{{ post.hotel.hotel_logo.url }}">
-                {% endif %}
-            {% else %}
-                <li>No rooms</li>
-            {% endif %}
             </div>
             <div class="content">
                 <div class="card">
@@ -51,9 +42,8 @@
                                 {% for hotel in hotels %}
                                     <tr>
                                         <td>{{ hotel.hotel_name }} </td>
-                                        
-
                                         <td>{{ hotel.hotel_address }}</td>
+                                        <li><img src ="{{ hotel.hotel_logo.url }}"></li>
                                         <td>{{ hotel.hotel_city }}</td>
                                         <td>{{ hotel.hotel_postcode }}</td>
                                         <td>{{ hotel.hotel_country }}</td>
@@ -61,15 +51,13 @@
                                         <td>{{ hotel.hotel_star_rating }}</td>
                                     </tr>
                                 {% empty %}
-
+                                
                                 {% endfor %}
-                                {% if hotel.hotel_logo %}
-                                <img src ="{{ post.hotel.hotel_logo.url }}">
-        
-                              {% endif %}
                             {% endif %}
+                            
                             </tbody>
                         </table>
+                       
                     </ul>
                 </div>
             </div>

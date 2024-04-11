@@ -9,9 +9,19 @@
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {% if user.is_authenticated %}
+            {% if hotels %}
+                        {% for hotel in hotels %}
+                            <tr>
+                                <tr>{ hotel.hotel_logo.url }</tr>
+                                <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
+                            </tr>
+                        {% empty %}
+                        
+                        {% endfor %}
+                    {% endif %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <img src="/hotel_booking_app/static/images/hotel_logo.png" href="{% url 'dashboard' %}" alt="Hotel logo">
+                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'dashboard' %}">dashboard</a>
@@ -32,6 +42,16 @@
                     </li>
                 </ul>
             {% else %}
+            {% if hotels %}
+                        {% for hotel in hotels %}
+                            <tr>
+                                <tr>{ hotel.hotel_logo.url }</tr>
+                                <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
+                            </tr>
+                        {% empty %}
+                        
+                        {% endfor %}
+                    {% endif %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'make_booking' %}">make_booking</a>
@@ -45,8 +65,8 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <img src="{% static 'images/hotel_logo.png' %}" href="{% url 'home' %}" alt="Hotel logo">
-          
+
+                        
                         <!-- print('{% static 'images/hotel_logo.png' %}') -->
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}">Login</a>

@@ -45,11 +45,10 @@ def home(request):
 def  login_user(request):
     pass
 
-
 def logout_user(request):
 	logout(request)
 	messages.success(request, "You Have Been Logged Out...")
-	return redirect('home')
+	return redirect('dashboard')
 
 def register_user(request):
 	if request.method == 'POST':
@@ -112,8 +111,9 @@ def inventory(request):
 def dashboard(request):
     # return render(request, "dashboard.html")
     hotels = Hotel.objects.all()
-    return render(request, 'dashboard.html', {'hotels': hotels})
+    roomtypes = RoomType.objects.all()
 
+    return render(request, 'dashboard.html', {'hotels': hotels, 'roomtypes': roomtypes})
 
 def booking(request):
     return render(request, "booking.html")
