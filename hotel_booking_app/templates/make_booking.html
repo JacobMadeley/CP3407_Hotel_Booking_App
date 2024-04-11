@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
+
 {% block content %}
+    <!-- Check if user is authenticated -->
+    {% if user.is_authenticated %}
 
-
-
-{% if user.is_authenticated %}
-
-{% else %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make Booking</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
-</head>
-<body>
-    <form action="/make_booking/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-{% endif %}
-
+    {% else %}
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Make Booking</title>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
+        </head>
+        <body>
+            <!-- Form for making a booking with POST method -->
+            <form action="/make_booking/" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Submit">
+            </form>
+        </body>
+    {% endif %}
+    
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    
+    <!-- Check if user is authenticated -->
     {% if user.is_authenticated %}
         <!DOCTYPE html>
         <html lang="en">
@@ -12,6 +13,7 @@
             <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
         </head>
         <body>
+        <!-- Navbar with hotel logo -->    
         <div class="container">
             <div class="navbar">
                 Hotel Booking Dashboard
@@ -21,12 +23,7 @@
                 <div class="card">
                     <h2>Hotel Information</h2>
                     <ul>
-                        <!-- {% for booking in recent_bookings %}
-                        <li>{{ booking.guest.guest_first_name }} {{ booking.guest.guest_last_name }} - Room: {{ booking.room.room_number }}</li>
-                        {% empty %}
-                        <li>No recent bookings found.</li>
-                        {% endfor %} -->
-
+                        <!-- Display hotel information in a table -->
                         <table class="table">
                             <thead>
                                 <tr>
@@ -41,7 +38,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                            <!-- Loop through hotels and display information -->        
                             {% if hotels %}
                                 {% for hotel in hotels %}
                                     <tr>
@@ -54,11 +51,12 @@
                                         <td>{{ hotel.hotel_phone_number }}</td>
                                         <td>{{ hotel.hotel_star_rating }}</td>
                                     </tr>
+
+                                <!-- If no hotels found -->
                                 {% empty %}
 
                                 {% endfor %}
                             {% endif %}
-
                             </tbody>
                         </table>
                     </ul>
@@ -68,57 +66,15 @@
         </body>
         </html>
 
-        <!-- 
-<table class="table table-striped table-hover table-bordered">
-  <thead class="table-dark">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Address</th>
-      <th scope="col">City</th>
-      <th scope="col">State</th>
-      <th scope="col">Zipcode</th>
-      <th scope="col">Created At</th>
-      <th scope="col">ID</th>
-    </tr>
-  </thead>
-  <tbody>
-    
-{% if records %}
-	{% for record in records %}
-		<tr>
-			<td>{{ record.first_name }} {{ record.last_name }}</td>
-			<td>{{ record.email }}</td>
-			<td>{{ record.phone }}</td>
-			<td>{{ record.address }}</td>
-			<td>{{ record.city }}</td>
-			<td>{{ record.state }}</td>
-			<td>{{ record.zipcode }}</td>
-			<td>{{ record.created_at }}</td>
-			<td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
-		</tr>
-	{% endfor %}
-
-{% endif %}
-
-	
-	  </tbody>
-	</table>
-
-
-
- -->
-
+    <!-- If user is not authenticated -->    
     {% else %}
-
         <div class="col-md-6 offset-md-3">
         <h1>Login</h1>
         <br/>
 
+        <!-- Form for user to login with POST method -->
         <form method="POST" action="{% url 'home' %}">
             {% csrf_token %}
-
             <div class="mb-3">
                 <input type="text" class="form-control" name="username" , placeholder="Username" required>
 
@@ -129,11 +85,6 @@
             </div>
             <br/>
             <button type="submit" class="btn btn-secondary">Login</button>
-
         </form>
-
-
-
     {% endif %}
-
 {% endblock %}

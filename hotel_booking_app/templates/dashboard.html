@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+
 {% block content %}
+    <!-- Check if user is authenticated -->
     {% if user.is_authenticated %}
         <!DOCTYPE html>
         <html lang="en">
@@ -19,12 +21,7 @@
                 <div class="card">
                     <h2>Hotel Information</h2>
                     <ul>
-                        <!-- {% for booking in recent_bookings %}
-                        <li>{{ booking.guest.guest_first_name }} {{ booking.guest.guest_last_name }} - Room: {{ booking.room.room_number }}</li>
-                        {% empty %}
-                        <li>No recent bookings found.</li>
-                        {% endfor %} -->
-                        
+                        <!-- Display hotel information in a table -->
                         <table class="table">
                             <thead>
                                 <tr>
@@ -38,6 +35,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <!-- Loop through hotels and display information -->
                             {% if hotels %}
                                 {% for hotel in hotels %}
                                     <tr>
@@ -49,26 +47,29 @@
                                         <td>{{ hotel.hotel_phone_number }}</td>
                                         <td>{{ hotel.hotel_star_rating }}</td>
                                     </tr>
+                                
+                                <!-- If no hotels found -->
                                 {% empty %}
                                 
                                 {% endfor %}
                             {% endif %}
-                            
                             </tbody>
                         </table>
-                       
                     </ul>
                 </div>
             </div>
-            <!-- <button type="submit" class="btn btn-secondary">Add Record</button> -->
+            <!-- Button to add more hotel record -->
             <a href="{% url 'add_record' %}" class="btn btn-secondary">Add Record</a>
         </div>
         </body>
         </html>
+
+    <!-- If user is not authenticated -->
     {% else %}
         <div class="col-md-6 offset-md-3">
         <h1>Login</h1>
         <br/>
+        <!-- Login form -->
         <form method="POST" action="{% url 'home' %}">
             {% csrf_token %}
             <div class="mb-3">

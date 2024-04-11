@@ -1,54 +1,52 @@
 {% extends 'base.html' %}
+
 {% block content %}
-
-
-
-{% if user.is_authenticated %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking User</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
-</head>
-<body>
-    <div class="container">
-        <div class="navbar">
-          Hotel Booking User
-        </div>
-       
-        <div class="content">
-          <div class="card">
-            <h1>Hotel Booking User</h1>
-            </table>
+  <!-- Check if user is authenticated -->
+  {% if user.is_authenticated %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hotel Booking User</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
+    </head>
+    <body>
+        <div class="container">
+          <div class="navbar">
+            Hotel Booking User
+          </div>
+        
+          <div class="content">
+            <div class="card">
+              <h1>Hotel Booking User</h1>
+              <!-- Table for user data -->
+              <table>
+              </table>
+            </div>
           </div>
         </div>
+    </body>
+    </html>
+
+  {% else %}
+    <div class="col-md-6 offset-md-3">
+    <h1>Login</h1>
+    <br/>
+    <!-- Login form with POST method -->
+    <form method="POST" action="{% url 'home' %}">
+      {% csrf_token %}
+      <!-- Input field for username and password -->
+      <div class="mb-3">
+        <input type="text" class="form-control" name="username", placeholder="Username" required>
+        
+      </div><br/>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="password", placeholder="Password" required>
       </div>
-</body>
-</html>
-
-{% else %}
-
-<div class="col-md-6 offset-md-3">
-<h1>Login</h1>
-<br/>
-
-<form method="POST" action="{% url 'home' %}">
-	{% csrf_token %}
-
-  <div class="mb-3">
-    <input type="text" class="form-control" name="username", placeholder="Username" required>
-    
-  </div><br/>
-  <div class="mb-3">
-    <input type="password" class="form-control" name="password", placeholder="Password" required>
-  </div>
-  <br/>
-  <button type="submit" class="btn btn-secondary">Login</button>
-
-</form>
-{% endif %}
-
+      <br/>
+      <button type="submit" class="btn btn-secondary">Login</button>
+    </form>
+  {% endif %}
 {% endblock %}

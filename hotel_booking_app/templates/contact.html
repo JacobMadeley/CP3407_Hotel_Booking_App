@@ -1,53 +1,52 @@
 {% extends 'base.html' %}
+
 {% block content %}
+  <!-- Check if user is authenticated -->
+  {% if user.is_authenticated %}
 
+  <!-- If user is not authenticated -->
+  {% else %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="navbar">
+            </div>
+            <div class="content">
+              <div class="card">
+                <h1>Contact Details</h1>
+                    <!-- Check if contacts are not empty -->
+                    {% if not empty %}
+                        <!-- Loop through hotels and display contact details-->
+                        {% for hotel in hotels %}
+                          <div class="card" style="width=device-width, initial-scale=1.0">
+                            <div class="card-body">
+                              <h3>Contact details</h3>
+                              <h5 class="card-title">{{ hotel.hotel_name }} hotel</h5> 
+                              <h5 class="card-title">{{ hotel.hotel_name }}@gmail.com</h5> 
+                              <p class="card-text">{{ hotel.hotel_phone_number }}</p>
+                              <p class="card-text">{{ hotel.hotel_address }} {{ hotel.hotel_city }},</p>
+                              <p class="card-text">{{ hotel.hotel_country }} {{ hotel.hotel_postcode }}</p>
 
+                              <h1></h1>
+                            </div>
+                          </div>
+                        {% endfor %}
 
-{% if user.is_authenticated %}
-
-{% else %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
-</head>
-<body>
-    <div class="container">
-        <div class="navbar">
-        </div>
-        <div class="content">
-          <div class="card">
-            <h1>Contact Details</h1>
-                {% if not empty %}
-                    
-                    {% for hotel in hotels %}
-                    <div class="card" style="width=device-width, initial-scale=1.0">
-                      <div class="card-body">
-                        <h3>Contact details</h3>
-                        <h5 class="card-title">{{ hotel.hotel_name }} hotel</h5> 
-                        <h5 class="card-title">{{ hotel.hotel_name }}@gmail.com</h5> 
-                        <p class="card-text">{{ hotel.hotel_phone_number }}</p>
-                        <p class="card-text">{{ hotel.hotel_address }} {{ hotel.hotel_city }},</p>
-                        <p class="card-text">{{ hotel.hotel_country }} {{ hotel.hotel_postcode }}</p>
-
-                        <h1></h1>
-                      </div>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <li>No rooms</li>
-                {% endif %}
-                
+                    <!-- If no hotels found -->
+                    {% else %}
+                        <li>No rooms</li>
+                    {% endif %}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-</body>
-</html>
-
-{% endif %}
-
+    </body>
+    </html>
+  {% endif %}
 {% endblock %}

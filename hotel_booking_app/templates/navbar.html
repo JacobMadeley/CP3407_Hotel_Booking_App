@@ -8,20 +8,26 @@
         </button>
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Check if user is authenticated -->
             {% if user.is_authenticated %}
-            {% if hotels %}
-                        {% for hotel in hotels %}
-                            <tr>
-                                <tr>{ hotel.hotel_logo.url }</tr>
-                                <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
-                            </tr>
-                        {% empty %}
-                        
-                        {% endfor %}
-                    {% endif %}
+                
+                <!-- Check if hotels exist -->
+                {% if hotels %}
+                    <!-- Loop through hotels -->
+                    {% for hotel in hotels %}
+                        <tr>
+                            <tr>{ hotel.hotel_logo.url }</tr>
+                            <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
+                        </tr>
+                    <!-- If no hotels -->    
+                    {% empty %}
+
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Navigation links for authenticated users -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'dashboard' %}">dashboard</a>
@@ -36,22 +42,30 @@
                         <a class="nav-link" href="{% url 'inventory' %}">inventory</a>
                     </li>
                 </ul>
+                <!-- Logout link for authenticated users -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
                 </ul>
+            <!-- If user is not authenticated -->
             {% else %}
-            {% if hotels %}
-                        {% for hotel in hotels %}
-                            <tr>
-                                <tr>{ hotel.hotel_logo.url }</tr>
-                                <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
-                            </tr>
-                        {% empty %}
-                        
-                        {% endfor %}
-                    {% endif %}
+
+                <!-- Check if hotels exist -->
+                {% if hotels %}
+                    <!-- Loop through hotels -->
+                    {% for hotel in hotels %}
+                        <tr>
+                            <tr>{ hotel.hotel_logo.url }</tr>
+                            <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
+                        </tr>
+                    <!-- If no hotels -->    
+                    {% empty %}
+
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Navigation links for unauthenticated users -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'make_booking' %}">make_booking</a>
@@ -63,11 +77,8 @@
                         <a class="nav-link" href="{% url 'inventory' %}">inventory</a>
                     </li>
                 </ul>
+                <!-- Login and Register links for unauthenticated users -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-
-                        
-                        <!-- print('{% static 'images/hotel_logo.png' %}') -->
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}">Login</a>
                     </li>

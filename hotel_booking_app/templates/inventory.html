@@ -1,42 +1,45 @@
 {% extends 'base.html' %}
+
 {% block content %}
-
-
-
-{% if user.is_authenticated %}
-<body>
-   <form enctype="multipart/form-data" action="/add_room_type/" method="post">
-       {% csrf_token %}
-       {{ form }}
-       <input type="submit" value="Submit">
-  </form>
-  <form action="/add_room/" method="post">
-      {% csrf_token %}
-      {{ form2 }}
-      <input type="submit" value="Submit">
-  </form>
-</body>
-{% else %}
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Hotel Room Inventory</title>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
-  </head>
+  <!-- Check if user is authenticated -->
+  {% if user.is_authenticated %}
   <body>
+    <!-- Form for adding room type -->
+    <form enctype="multipart/form-data" action="/add_room_type/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+    <!-- Form for adding room -->
+    <form action="/add_room/" method="post">
+        {% csrf_token %}
+        {{ form2 }}
+        <input type="submit" value="Submit">
+    </form>
+  </body>
+  
+  <!-- If user is not authenticated, display the inventory -->
+  {% else %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hotel Room Inventory</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
+    </head>
+    <body>
       <div class="container">
           <div class="navbar">
             Hotel Booking Inventory
           </div>
           <div class="content">
             <div class="card">
+              <!-- Display room types -->
               <h3>Inventory Status</h3>
-
+                  <!-- If room types are not empty, loop through room types and display them-->
                   {% if not empty %}
-
                       {% for roomtype in roomtypes %}
                       <li>Room type: {{ roomtype.room_type_name }}</li>
                       <li>Room Descriptions: {{roomtype.room_type_description}}</li>
@@ -47,14 +50,11 @@
                   {% else %}
                       <li>No rooms</li>
 
-                  {% endif %}
-                  
+                  {% endif %}   
             </div>
           </div>
         </div>
-  </body>
-  </html>
-  
-  {% endif %}
-
-  {% endblock %}
+    </body>
+    </html>
+    {% endif %}
+{% endblock %}
