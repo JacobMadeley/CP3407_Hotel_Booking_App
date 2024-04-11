@@ -16,9 +16,10 @@ urlpatterns = [
                   path("users/", views.users, name="users"),
                   path("make_booking/", views.make_booking, name="make_booking"),
                   path("payments/", views.payments, name="payments"),
-                  path("addroomtype/", views.inventory, name="inventory"),
-                  path("addroom/", views.add_room, name='inventory'),
+                  path("add_room_type/", views.inventory, name="inventory"),
+                  path("add_room/", views.add_room, name='inventory'),
                   path("payment/", views.payments, name='payments'),
                   path('add_record/', views.add_record, name='add_record'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # Path: hotel_booking_app/views.py

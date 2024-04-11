@@ -4,6 +4,7 @@ from django.utils import timezone
 
 class Hotel(models.Model):
     hotel_name = models.CharField(max_length=50, primary_key=True)
+    hotel_logo = models.ImageField(upload_to='media/images', null=True, blank=True)
     hotel_address = models.CharField(max_length=50)
     hotel_city = models.CharField(max_length=50)
     hotel_country = models.CharField(max_length=50)

@@ -5,12 +5,12 @@
 
 {% if user.is_authenticated %}
 <body>
-  <form enctype="multipart/form-data" action="/addroomtype/" method="post">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="Submit">
+   <form enctype="multipart/form-data" action="/add_room_type/" method="post">
+       {% csrf_token %}
+       {{ form }}
+       <input type="submit" value="Submit">
   </form>
-  <form action="/addroom/" method="post">
+  <form action="/add_room/" method="post">
       {% csrf_token %}
       {{ form2 }}
       <input type="submit" value="Submit">
@@ -24,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Hotel Room Inventory</title>
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="styles.css">
+      <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
   </head>
   <body>
       <div class="container">
@@ -44,14 +44,14 @@
                   {% endif %} -->
                   {% if not empty %}
                       <li>Room ID | Is Available? | In Use? | Needs Cleaning?</li>
-                      {% for roomtype in roomtypes %}
-                      <li>{{ roomtype.room_type_name }} {{roomtype.room_type_images}}</li>
-                      <li><img src ="{{ roomtype.room_type_images.url }}"></li>
+                      {% for room_type in room_types %}
+                      <li>{{ room_type.room_type_name }} {{room_type.room_type_images}}</li>
+                      <li><img src ="{{ room_type.room_type_images.url }}"></li>
             
                       
                       {% endfor %}
-                      {% if roomtype.room_type_images %}
-                        <img src ="{{ post.roomtype.room_type_images.url }}">
+                      {% if room_type.room_type_images %}
+                        <img src ="{{ post.room_type.room_type_images.url }}" alt="Room image">
                       {% endif %}
                   {% else %}
                       <li>No rooms</li>
