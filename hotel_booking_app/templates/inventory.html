@@ -34,26 +34,19 @@
           <div class="content">
             <div class="card">
               <h3>Inventory Status</h3>
-                  <!-- {% if not empty %}
-                      <li>Room ID | Is Available? | In Use? | Needs Cleaning?</li>
-                      {% for room in rooms %}
-                      <li>{{ room.id }} | {{ room.rooms_available }} | {{room.rooms_in_use}} | {{ room.rooms_to_be_cleaned }}</li>
-                      {% endfor %}
-                  {% else %}
-                      <li>No rooms</li>
-                  {% endif %} -->
-                  {% if not empty %}
-                      <li>Room ID | Is Available? | In Use? | Needs Cleaning?</li>
-                      {% for roomtype in roomtypes %}
-                      <li>{{ roomtype.room_type_name }} {{roomtype.room_type_images}}</li>
-                      <li><img src ="{{ roomtype.room_type_images.url }}"></li>
-                      {% endfor %}
-                      {% if roomtype.room_type_images %}
-                        <img src ="{{ post.roomtype.room_type_images.url }}">
 
-                      {% endif %}
+                  {% if not empty %}
+
+                      {% for roomtype in roomtypes %}
+                      <li>Room type: {{ roomtype.room_type_name }}</li>
+                      <li>Room Descriptions: {{roomtype.room_type_description}}</li>
+                      <li>Room price: ${{roomtype.room_type_price}}</li>
+                      <img src ="{{ roomtype.room_type_images.url }}" width="1000" height="800">
+                      {% endfor %}
+
                   {% else %}
                       <li>No rooms</li>
+
                   {% endif %}
                   
             </div>

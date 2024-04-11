@@ -32,22 +32,29 @@ def home(request):
 		if user is not None:
 			login(request, user)
 			messages.success(request, "You Have Been Logged In!")
+            
 			return redirect('dashboard')
 		else:
 			messages.success(request, "There Was An Error Logging In, Please Try Again...")
+            
 			return redirect('dashboard')
 	else:
+
 		return render(request, 'dashboard.html')
 
 
 
 
 def  login_user(request):
+    
     pass
 
 def logout_user(request):
+    
+
 	logout(request)
 	messages.success(request, "You Have Been Logged Out...")
+    
 	return redirect('dashboard')
 
 def register_user(request):
@@ -116,11 +123,13 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'hotels': hotels, 'roomtypes': roomtypes})
 
 def booking(request):
-    return render(request, "booking.html")
+    hotels = Hotel.objects.all()
+    return render(request, "booking.html", {'hotels': hotels})
 
 
 def user(request):
-    return render(request, "user.html")
+    hotels = Hotel.objects.all()
+    return render(request, "user.html", {'hotels': hotels})
     #
     # users = Guest.objects.all()
     # return render(request, 'user.html', {'users': users})
@@ -193,8 +202,8 @@ def make_booking(request):
             return HttpResponseRedirect('/payment/')
     else:
         form = BookingForm()
-        
-    return render(request, 'make_booking.html', {'form': form})
+    hotels = Hotel.objects.all()
+    return render(request, 'make_booking.html', {'form': form, 'hotels': hotels})
 
 def payments(request):
     if request.method=='POST':
