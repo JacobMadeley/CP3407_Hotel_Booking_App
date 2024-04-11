@@ -63,6 +63,10 @@
                                 {% empty %}
 
                                 {% endfor %}
+                                {% if hotel.hotel_logo %}
+                                <img src ="{{ post.hotel.hotel_logo.url }}">
+        
+                              {% endif %}
                             {% endif %}
                             </tbody>
                         </table>
