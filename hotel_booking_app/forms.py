@@ -103,13 +103,13 @@ class AddRecordForm(forms.ModelForm):
 
 
 
-    hotel_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Name", "class":"form-control"}), label="")
-    hotel_address = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Address", "class":"form-control"}), label="")
-    hotel_city = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel City", "class":"form-control"}), label="")
-    hotel_country = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Country", "class":"form-control"}), label="")
-    hotel_postcode = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Postcode", "class":"form-control"}), label="")
-    hotel_phone_number = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Phone Number", "class":"form-control"}), label="")
-    hotel_star_rating = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Star Rating", "class":"form-control"}), label="")
+    hotel_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Name", "class":"form-control"}), label="",error_messages={'required': ''})
+    hotel_address = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Address", "class":"form-control"}), label="",error_messages={'required': ''})
+    hotel_city = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel City", "class":"form-control"}), label="",error_messages={'required': ''})
+    hotel_country = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Country", "class":"form-control"}), label="",error_messages={'required': ''})
+    hotel_postcode = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Postcode", "class":"form-control"}), label="",error_messages={'required': ''})
+    hotel_phone_number = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Phone Number", "class":"form-control"}), label="",error_messages={'required': ''})
+    hotel_star_rating = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Hotel Star Rating", "class":"form-control"}), label="",error_messages={'required': ''})
 
     class Meta:
         model = Hotel
