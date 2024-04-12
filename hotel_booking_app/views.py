@@ -137,7 +137,7 @@ def user(request):
     guests = Guest.objects.all()
     rooms = Room.objects.all()
     bookings = Booking.objects.all()
-    return render(request, "user.html", {'hotels': hotels, 'guests': guests, 'bookings': bookings, 'room': room})
+    return render(request, "user.html", {'hotels': hotels, 'guests': guests, 'bookings': bookings, 'rooms': rooms})
     #
     # users = Guest.objects.all()
     # return render(request, 'user.html', {'users': users})

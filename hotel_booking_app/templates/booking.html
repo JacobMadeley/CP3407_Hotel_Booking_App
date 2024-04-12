@@ -24,10 +24,9 @@
                             <tr>
                                 <th>Booking ID</th>
                                 <th>Room ID</th>
-                                <th>Check In</th>
-                                <th>Check Out</th>
+                                <th>Book start date</th>
+                                <th>Book end date</th>
                                 <th>Guests</th>
-                                <th>Price</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -36,7 +35,11 @@
                             {% for booking in bookings %}
                                 <tr>
                                     <td>{{ booking.booking_id }} </td>
-                                    <td>{{ booking }} </td>
+                                    <td>{{ booking.room.room_id }} </td>
+                                    <td>{{ booking.booking_check_in }} </td>
+                                    <td>{{ booking.booking_check_out }} </td>
+                                    <td>{{ booking.guest.guest_id }} </td>
+                                    <td>{{ booking.room.room_status }} </td>
         
         
                                     
