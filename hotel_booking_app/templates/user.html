@@ -17,60 +17,46 @@
       <div class="container">
         <div class="content">
             <div class="card">
-                <h2><b>Hotel Booking Users</b></h2>
+                <h2><b>Customer booking details</b></h2>
                 <!-- Display hotel booking users in a table -->
                 <table class="table">
-                    <thead>
-                        <tr>
-                          <th>Guest ID</th>
-                          <th>Title</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Date of Birth</th>
-                          <th>Phone Number</th>
-                          <th>Email</th>
-                          <th>Address</th>
-                          <th>City</th>
-                          <th>State</th>
-                          <th>Country</th>
-                          <th>Postcode</th>
-                          <th>Booking</th>
-                          <th>Related Name</th>
-                          <th>Payment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Loop through guests and display information -->
-                    {% if guests %}
-                        {% for guest in guests %}
-                        <tr>
-                          <td>{{ guest.guest_id }}</td>
-                          <td>{{ guest.guest_title }}</td>
-                          <td>{{ guest.guest_first_name }}</td>
-                          <td>{{ guest.guest_last_name }}</td>
-                          <td>{{ guest.guest_date_of_birth }}</td>
-                          <td>{{ guest.guest_phone_number }}</td>
-                          <td>{{ guest.guest_email }}</td>
-                          <td>{{ guest.guest_address }}</td>
-                          <td>{{ guest.guest_city }}</td>
-                          <td>{{ guest.guest_state }}</td>
-                          <td>{{ guest.guest_country }}</td>
-                          <td>{{ guest.guest_postcode }}</td>
-                          <td>{{ guest.booking }}</td>
-                          <td>{{ guest.related_name }}</td>
-                          <td>{{ guest.payment }}</td>
-                      </tr>
+                  <thead>
+                      <tr>
+                        <th>Guest ID</th>
+                        <th>Booking ID</th>
+                        <th>Customer Name</th>
+                        <th>Date of Birth</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Address</th>
+          
                         
-                        <!-- If no guests found -->
+                      </tr>
+                  </thead>
+                  <!-- Loop through bookings and display details -->
+                  {% if guests %}
+                      {% for guest in guests %}
+                          <tr>
+                              <td>{{ guest.guest_id }} </td>
+                              <td>{{ guest.booking.booking_id }} </td>
+                              <td>{{ guest.guest_first_name }} {{ guest.guest_last_name }}</td>
+                              <td>{{ guest.guest_date_of_birth }} </td>
+                              <td>{{ guest.guest_phone_number }} </td>
+                              <td>{{ guest.guest_email }} </td>
+                              <td>{{ guest.guest_address }} {{ guest.guest_city }}, {{ guest.guest_state }} {{ guest.guest_country }} {{ guest.guest_postcode }}<O/td>
+                              
+                                
+                          </tr>
+                      
+                        <!-- If no hotels found -->
                         {% empty %}
                         <tr>
-                            <td colspan="7">No guests found.</td>
+                            <td colspan="7">No guest found.</td>
                         </tr>
 
                         {% endfor %}
                     {% endif %}
-                    </tbody>
-                </table>
+              </table>
             </div>
     </body>
     </html>

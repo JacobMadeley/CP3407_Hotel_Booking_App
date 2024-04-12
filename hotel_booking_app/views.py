@@ -125,12 +125,19 @@ def dashboard(request):
 
 def booking(request):
     hotels = Hotel.objects.all()
-    return render(request, "booking.html", {'hotels': hotels})
+    guests = Guest.objects.all()
+    bookings = Booking.objects.all()
+    rooms = Room.objects.all()
+
+    return render(request, "booking.html", {'hotels': hotels, 'guests': guests, 'bookings': bookings, 'rooms': rooms})
 
 
 def user(request):
     hotels = Hotel.objects.all()
-    return render(request, "user.html", {'hotels': hotels})
+    guests = Guest.objects.all()
+    rooms = Room.objects.all()
+    bookings = Booking.objects.all()
+    return render(request, "user.html", {'hotels': hotels, 'guests': guests, 'bookings': bookings, 'room': room})
     #
     # users = Guest.objects.all()
     # return render(request, 'user.html', {'users': users})

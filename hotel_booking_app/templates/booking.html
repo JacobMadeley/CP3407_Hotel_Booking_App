@@ -35,22 +35,20 @@
                         {% if bookings %}
                             {% for booking in bookings %}
                                 <tr>
-                                    <td>{{ booking.booking_id }}</td>
-                                    <td>{{ booking.room_id }}</td>
-                                    <td>{{ booking.check_in }}</td>
-                                    <td>{{ booking.check_out }}</td>
-                                    <td>{{ booking.guests }}</td>
-                                    <td>{{ booking.price }}</td>
-                                    <td>{{ booking.status }}</td>
+                                    <td>{{ booking.booking_id }} </td>
+                                    <td>{{ booking }} </td>
+        
+        
+                                    
                                 </tr>
                             
-                            <!-- If no bookings found -->
+                            <!-- If no hotels found -->
                             {% empty %}
                             <tr>
-                                <td colspan="7">No bookings found.</td>
+                                <td colspan="7">No guest found.</td>
                             </tr>
-
-                            {% endfor %}
+  
+                          {% endfor %}
                         {% endif %}
                     </table>
                 </div>
