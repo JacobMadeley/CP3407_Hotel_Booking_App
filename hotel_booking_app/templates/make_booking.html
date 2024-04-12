@@ -15,12 +15,16 @@
             <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
         </head>
         <body>
-            <!-- Form for making a booking with POST method -->
-            <form action="/make_booking/" method="post">
-                {% csrf_token %}
-                {{ form }}
-                <input type="submit" value="Submit">
-            </form>
+            <div class="col-md-6 offset-md-3">
+                <h1><b>Update Room Status</b></h1>
+                <br/>
+                <!-- Form for making a booking with POST method -->
+                <form action="/make_booking/" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-secondary" value="Submit">
+                </form>
+            </div>
         </body>
     {% endif %}
     
