@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
+  <div class="col-md-6 offset-md-3">
+  <h1><b>Add Record</b></h1>
+  <br/>
 
-<div class="col-md-6 offset-md-3">
-<h1>Add Record</h1>
-<br/>
+  <form method="POST" action="{% url 'add_record' %}" enctype="multipart/form-data">
+    {% csrf_token %}
 
-<form method="POST" action="{% url 'add_record' %}" enctype="multipart/form-data">
-	{% csrf_token %}
+    {{ form.as_p }}
 
-	{{ form.as_p }}
+  <br/>
+    <button type="submit" class="btn btn-secondary" href="{% url 'dashboard' %}">Add Record</button>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back</a>
 
-<br/>
-  <button type="submit" class="btn btn-secondary" href="{% url 'dashboard' %}">Add Record</button>
-   <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back</a>
+  </form>
 
-</form>
-
-</div>
-
+  </div>
 {% endblock %}
