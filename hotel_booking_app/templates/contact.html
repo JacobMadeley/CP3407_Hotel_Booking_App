@@ -16,35 +16,138 @@
     </head>
     <body>
         <div class="container">
-            <div class="navbar">
-            </div>
-            <div class="content">
-              <div class="card">
-                <h1>Contact Details</h1>
-                    <!-- Check if contacts are not empty -->
-                    {% if not empty %}
-                        <!-- Loop through hotels and display contact details-->
-                        {% for hotel in hotels %}
-                          <div class="card" style="width=device-width, initial-scale=1.0">
-                            <div class="card-body">
-                              <h5 class="card-title">{{ hotel.hotel_name }} hotel</h5> 
-                              <h5 class="card-title">{{ hotel.hotel_name }}@gmail.com</h5> 
-                              <p class="card-text">{{ hotel.hotel_phone_number }}</p>
-                              <p class="card-text">{{ hotel.hotel_address }} {{ hotel.hotel_city }},</p>
-                              <p class="card-text">{{ hotel.hotel_country }} {{ hotel.hotel_postcode }}</p>
 
-                              <h1></h1>
+
+
+
+          <div class="navbar">
+            Hotel Contact Information
+          </div>
+          
+          <div class="content" >
+            <div class="card"style="background-color:#222">
+              <!-- Display room types -->
+              
+                  <!-- If room types are not empty, loop through room types and display them-->
+                  {% if not empty %}
+                  {% for hotel in hotels %}
+                  <div class="card">
+                      <tr>
+                        <!-- <h3>Room Number: {{ room.room_number }}</h3>
+                         -->
+
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <h3>Hotel Name</h3>
                             </div>
                           </div>
-                        {% endfor %}
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <div class="card">
+                              <h5>{{ hotel.hotel_name }}</h5>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
 
-                    <!-- If no hotels found -->
-                    {% else %}
-                        <li>No rooms</li>
-                    {% endif %}
-              </div>
+
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <h3>Hotel Email</h3>
+                            </div>
+                            
+                            <div class="col">
+                              <h3>Hotel Number</h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <div class="card">
+                              <h5>{{ hotel.hotel_name }}  {{hotel.hotel_address}}@gmail.com</h5>
+                            </div>
+                            </div>
+                            
+                            <div class="col">
+                              <div class="card">
+                              <h5> {{ hotel.hotel_phone_number }}</h5>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <img src ="{{ room.room_type.room_type_images.url }}" width=100%; height= auto>
+                          
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <h1>Hotel Address</h1>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            
+                            <div class="col">
+                              <div class="card">
+                              <h5>  
+                                
+                                {{ hotel.hotel_address }} {{ hotel.hotel_city }}, {{ hotel.hotel_country }} {{ hotel.hotel_postcode }}
+                                
+                                </h5>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </tr>
+                      <a href="{% url 'inventory' %}" class="btn btn-secondary">Check Out Our Room Now!</a>
+
+
+                  <!-- If no hotels found -->
+                </div>
+                  {% empty %}
+                  <tr>
+                      <td colspan="7">No guest found.</td>
+                  </tr>
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </body>
     </html>
   {% endif %}
