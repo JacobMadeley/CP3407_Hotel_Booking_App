@@ -53,27 +53,112 @@
     <body>
       <div class="container">
           <div class="navbar">
-            Hotel Booking Inventory
+            Hotel Inventory
           </div>
-          <div class="content">
-            <div class="card">
+          
+          <div class="content" >
+            <div class="card"style="background-color:#222">
               <!-- Display room types -->
-              <h3>Inventory Status</h3>
+              
                   <!-- If room types are not empty, loop through room types and display them-->
-                  {% if not empty %}
-                      {% for roomtype in roomtypes %}
-                      <li>Room type: {{ roomtype.room_type_name }}</li>
-                      <li>Room Descriptions: {{roomtype.room_type_description}}</li>
-                      <li>Room price: ${{roomtype.room_type_price}}</li>
-                      <img src ="{{ roomtype.room_type_images.url }}" width="1000" height="800">
-                      {% endfor %}
+                  {% if rooms %}
+                  {% for room in rooms %}
+                  <div class="card">
+                      <tr>
+                        <!-- <h3>Room Number: {{ room.room_number }}</h3>
+                         -->
 
-                  {% else %}
-                      <li>No rooms</li>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <h3>Room Number</h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <div class="card">
+                              <h5>{{ room.room_number }}</h5>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
 
-                  {% endif %}   
+
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <h3>Room Type</h3>
+                            </div>
+                            
+                            <div class="col">
+                              <h3>Price per night</h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <div class="card">
+                              <h5>{{ room.room_type.room_type_name }}</h5>
+                            </div>
+                            </div>
+                            
+                            <div class="col">
+                              <div class="card">
+                              <h5>${{ room.room_type.room_type_price }}</h5>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <img src ="{{ room.room_type.room_type_images.url }}" width=100%; height= auto>
+                          
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            <div class="col">
+                              <h1>Room Description</h1>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container text-center">
+                          <div class="row align-items-end">
+                            
+                            <div class="col">
+                              <div class="card">
+                              <h5>  {{ room.room_type.room_type_description }}</h5>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </tr>
+                      <a href="{% url 'make_booking' %}" class="btn btn-secondary">Book This Room Now!</a>
+
+
+                  <!-- If no hotels found -->
+                </div>
+                  {% empty %}
+                  <tr>
+                      <td colspan="7">No guest found.</td>
+                  </tr>
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+          
         </div>
     </body>
     </html>
