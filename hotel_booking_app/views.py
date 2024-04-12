@@ -266,4 +266,5 @@ def updatestatus(request):
             room.save()
     else:
         form = UpdateRoomStatus()
-    return render(request, "update_status.html", {'form':form})
+    hotels = Hotel.objects.all()
+    return render(request, "update_status.html", {'form':form, 'hotels': hotels})
