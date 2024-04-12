@@ -44,16 +44,21 @@ class AddRoom(forms.Form):
 
 
 class PaymentForm(forms.Form):
-    payment_date = forms.DateField(label='date',initial=timezone.now)
-    payment_card_number = forms.CharField(label= 'Card Number')
-    payment_card_expiry_date = forms.DateField(label='Card Expiry')
-    payment_for_booking = forms.DecimalField(label='booking cost',max_digits=20, decimal_places=2, disabled=True, initial=200)
-    payment_for_service = forms.DecimalField(label='service cost',max_digits=20, decimal_places=2, disabled=True, initial=50)
-    payment_for_bar = forms.DecimalField(label='bar tab',max_digits=20, decimal_places=2, disabled=True, initial=20)
-    payment_for_late_check_out = forms.DecimalField(label='late checkout',max_digits=20, decimal_places=2, disabled=True, initial=0)
-    payment_for_miscellaneous = forms.DecimalField(label='misc costs',max_digits=20, decimal_places=2, disabled=True, initial=0)
-    payment_for_miscellaneous_description = forms.CharField(label='misc cost description', disabled=True, initial='N/A')
-    booking = forms.ModelChoiceField(label= 'booking', queryset=Booking.objects, disabled=True, widget=forms.HiddenInput())
+    payment_date = forms.DateField(label='Date', initial=timezone.now,widget=forms.DateInput(attrs={"class": "form-control"}))
+    payment_card_number = forms.CharField(label='Card Numeber',max_length=50,widget=forms.TextInput(attrs={"class": "form-control"}))
+    payment_card_expiry_date = forms.DateField(label='Card Expire Date', widget=forms.DateInput(attrs={"class": "form-control"}))
+
+
+    payment_for_booking = forms.DecimalField(label='booking cost',max_digits=20, decimal_places=2, disabled=True, initial=200, widget=forms.DateInput(attrs={"class": "form-control"}))
+    payment_for_service = forms.DecimalField(label='service cost',max_digits=20, decimal_places=2, disabled=True, initial=50, widget=forms.DateInput(attrs={"class": "form-control"}))
+    payment_for_bar = forms.DecimalField(label='bar tab',max_digits=20, decimal_places=2, disabled=True, initial=20, widget=forms.DateInput(attrs={"class": "form-control"}))
+    payment_for_late_check_out = forms.DecimalField(label='late checkout',max_digits=20, decimal_places=2, disabled=True, initial=0, widget=forms.DateInput(attrs={"class": "form-control"}))
+    payment_for_miscellaneous = forms.DecimalField(label='misc costs',max_digits=20, decimal_places=2, disabled=True, initial=0, widget=forms.DateInput(attrs={"class": "form-control"}))
+    payment_for_miscellaneous_description = forms.CharField(label='Misc Cost Description', disabled=True, initial='N/A', widget=forms.DateInput(attrs={"class": "form-control"}))
+
+
+    
+    booking = forms.ModelChoiceField(label='Booking', queryset=Booking.objects, disabled=True, widget=forms.HiddenInput(attrs={"class": "form-control"}))
     guest = forms.ModelChoiceField(label= 'guest', queryset = Guest.objects, disabled=True,widget=forms.HiddenInput())
     
 
