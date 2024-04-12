@@ -1,6 +1,7 @@
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +17,6 @@
                     <!-- Loop through hotels -->
                     {% for hotel in hotels %}
                         <tr>
-                            <tr>{ hotel.hotel_logo.url }</tr>
                             <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
                         </tr>
                     <!-- If no hotels -->    
@@ -30,16 +30,16 @@
                     <li class="nav-item">
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dashboard' %}">dashboard</a>
+                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'booking' %}">booking</a>
+                        <a class="nav-link" href="{% url 'booking' %}">Booking</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user' %}">user</a>
+                        <a class="nav-link" href="{% url 'user' %}">User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory' %}">inventory</a>
+                        <a class="nav-link" href="{% url 'inventory' %}">Inventory</a>
                     </li>
                 </ul>
                 <!-- Logout link for authenticated users -->
@@ -68,13 +68,13 @@
                 <!-- Navigation links for unauthenticated users -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'make_booking' %}">make_booking</a>
+                        <a class="nav-link" href="{% url 'make_booking' %}">Make_booking</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory' %}">inventory</a>
+                        <a class="nav-link" href="{% url 'inventory' %}">IDnventory</a>
                     </li>
                 </ul>
                 <!-- Login and Register links for unauthenticated users -->

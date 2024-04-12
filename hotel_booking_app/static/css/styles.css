@@ -2,32 +2,21 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #fff;
     color: #333;
-}
-
-.container {
-    display: grid;
-    grid-template-areas:
-      "navbar navbar"
-      "sidebar content";
-    grid-template-rows: auto 1fr;
-    grid-template-columns: 250px 1fr;
-    height: 100vh;
 }
 
 .navbar {
     grid-area: navbar;
-    background-color: #333;
+    background-color: #222;
     color: #fff;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
 }
 
-.content {
-    grid-area: content;
-    padding: 20px;
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
 }
 
 h1, h2, h3 {
@@ -56,10 +45,26 @@ a {
     color: #333;
 }
 
-.navbar-nav.ml-auto {
-  float: right;
+.card table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.navbar-nav.ml-auto .nav-link {
-  margin-left: 10px;
+.card th, .card td {
+    text-align: center;
+    padding: 10px;
+}
+
+.card th {
+    background-color: #333;
+    color: #fff;
+}
+
+.card tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
 }
