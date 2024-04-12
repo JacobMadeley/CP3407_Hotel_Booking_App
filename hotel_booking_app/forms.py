@@ -6,6 +6,7 @@ from .models import Hotel
 from .models import RoomType
 from .models import Booking
 from .models import Guest
+from .models import Room
 from django.utils import timezone
 # from .models import Record
 
@@ -26,6 +27,7 @@ class BookingForm(forms.Form):
     guest_state = forms.CharField(label='state',max_length=50)
     guest_country = forms.CharField(label='country',max_length=50)
     guest_postcode = forms.CharField(label='postcode',max_length=10)
+    room = forms.ModelChoiceField(label= 'room', queryset=Room.objects, required=True)
 
 
 class AddRoomType(forms.Form):
