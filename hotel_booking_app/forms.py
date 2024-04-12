@@ -115,3 +115,6 @@ class AddRecordForm(forms.ModelForm):
         exclude = ("hotel",)
     
 
+class UpdateRoomStatus(forms.Form):
+    room_number = forms.IntegerField(required=True,label='room number')
+    room_status = forms.ChoiceField(label='room status', choices=[(1,'occupied'), (2,'free'),(3,'needs cleaning'), (4,'needs maintenance')])

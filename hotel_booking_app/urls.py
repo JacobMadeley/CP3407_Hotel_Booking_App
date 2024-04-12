@@ -20,6 +20,7 @@ urlpatterns = [
                   path("add_room/", views.add_room, name='inventory'),
                   path("payment/", views.payments, name='payments'),
                   path('add_record/', views.add_record, name='add_record'),
+                  path('updatestatus/', views.updatestatus,name='updatestatus')
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # Path: hotel_booking_app/views.py

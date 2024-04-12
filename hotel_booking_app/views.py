@@ -18,6 +18,7 @@ from .forms import AddRoomType
 from .forms import AddRoom
 from .forms import PaymentForm
 from .forms import AddRecordForm
+from .forms import UpdateRoomStatus
 # Create your views here.
 
 
@@ -250,3 +251,18 @@ def payments(request):
         return render(request, "payments.html", {'form':form})
     except:
         return render(request, 'make_booking.html',{'form':BookingForm()})
+
+def updatestatus(request):
+    if request.method=='POST':
+        form = UpdateRoomStatus(request.POST)
+        if form.is_valid():
+            room_number=form.cleaned_data['room_number']
+            room_status=form.cleaned_data['room_status']
+            room = Room.objects.filter(room_number=room_number).values()
+            print(room)
+            room=Room.objects.all()[room[0]['room_id']]
+            room.room_status = room_status
+            room.save()
+    else:
+        form = UpdateRoomStatus()
+    return render(request, "update_status.html", {'form':form})
