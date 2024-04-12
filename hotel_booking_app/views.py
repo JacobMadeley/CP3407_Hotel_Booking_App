@@ -202,11 +202,17 @@ def make_booking(request):
             booking_request = Booking(booking_check_in = start, booking_check_out = end, booking_number_of_adults = adults, booking_number_of_children = children)
             guest = Guest(guest_title=guest_title, guest_first_name=guest_first_name, guest_last_name=guest_last_name, guest_date_of_birth=guest_date_of_birth, guest_phone_number=guest_phone_number, guest_email=guest_email, guest_address=guest_address, guest_city=guest_city, guest_state=guest_state, guest_country=guest_country, guest_postcode=guest_postcode, booking=booking_request)
             inventory_entry = Inventory(hotel = room.hotel,room = room,booking = booking_request, guest=guest)
+            booking_request.room=room
             #try:
             room.save()
             booking_request.save()
             guest.save()
             inventory_entry.save()
+            bookingid = booking_request.booking_id
+            bookingguestupdate = Booking.objects.all()[bookingid-1]
+            bookingguestupdate.guest=guest
+            bookingguestupdate.save()
+        
             request.session['guest_id'] = [guest.guest_id,booking_request.booking_id]
             #except:
             #    print('booking failed')
