@@ -56,7 +56,6 @@
                     <!-- Loop through hotels -->
                     {% for hotel in hotels %}
                         <tr>
-                            <tr>{ hotel.hotel_logo.url }</tr>
                             <td><img src ="{{ hotel.hotel_logo.url }}"width="150" height="100"></td>
                         </tr>
                     <!-- If no hotels -->    
@@ -74,7 +73,7 @@
                         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory' %}">IDnventory</a>
+                        <a class="nav-link" href="{% url 'inventory' %}">Inventory</a>
                     </li>
                 </ul>
                 <!-- Login and Register links for unauthenticated users -->

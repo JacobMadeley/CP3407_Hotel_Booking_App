@@ -31,18 +31,17 @@ class BookingForm(forms.Form):
 
 
 class AddRoomType(forms.Form):
-    room_type_name = forms.CharField(label='room type', max_length=100)
-    room_type_description = forms.CharField(label='description', max_length=150)
-    room_type_price = forms.IntegerField(label='price', max_value=1000)
-    room_image_url = forms.ImageField(label='Image')
+    room_type_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Room Type", "class":"form-control"}), label="",error_messages={'required': ''}, max_length=100)
+    room_type_description = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Room Description", "class":"form-control"}), label="",error_messages={'required': ''}, max_length=150)
+    room_type_price = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Room Price", "class":"form-control"}), label="",error_messages={'required': ''}, max_value=1000)
+    room_image_url = forms.ImageField(label='Room Image')
+    
     
 class AddRoom(forms.Form):
-    room_number = forms.IntegerField(label='room number')
-    room_status = forms.ChoiceField(label='room status', choices=[(1,'occupied'), (2,'free'),(3,'needs cleaning'), (4,'needs maintenance')])
-    #hotel = forms(Hotel, on_delete=models.CASCADE)
-    #room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
-    hotel = forms.ModelChoiceField(label= 'hotel', queryset=Hotel.objects, required=False)
-    room_type = forms.ModelChoiceField(label='room type', queryset=RoomType.objects, required=False)
+    room_number = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Room Number", "class":"form-control"}), label="",error_messages={'required': ''})
+    room_status = forms.ChoiceField(required=True, label='Room Status', choices=[(1,'Occupied'), (2,'Free'),(3,'Needs Cleaning'), (4,'Needs Maintenance')], widget=forms.Select(attrs={"class": "form-control"}))
+    hotel = forms.ModelChoiceField(label= 'Hotel', queryset=Hotel.objects, required=False, widget=forms.Select(attrs={"class": "form-control"}))
+    room_type = forms.ModelChoiceField(label='Room Type', queryset=RoomType.objects, required=False, widget=forms.Select(attrs={"class": "form-control"}))
 
 class PaymentForm(forms.Form):
     payment_date = forms.DateField(label='date',initial=timezone.now)

@@ -10,36 +10,48 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Hotel Booking Bookings</title>
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="/hotel_booking_app/static/css/styles.css">
+            {% load static %}
+            <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         </head>
         <body>
         <div class="container">
             <div class="content">
                 <div class="card">
-                    <h1>Bookings</h1>
-                    <table>
-                        <!-- Table headers -->
-                        <tr>
-                            <th>Booking ID</th>
-                            <th>Room ID</th>
-                            <th>Check In</th>
-                            <th>Check Out</th>
-                            <th>Guests</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                        </tr>
-                        <!-- Loop through bookings and display details -->
-                        {% for booking in bookings %}
+                    <h2><b>Bookings</b></h2>
+                    <!-- Display booking information in a table -->
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>{{ booking.booking_id }}</td>
-                                <td>{{ booking.room_id }}</td>
-                                <td>{{ booking.check_in }}</td>
-                                <td>{{ booking.check_out }}</td>
-                                <td>{{ booking.guests }}</td>
-                                <td>{{ booking.price }}</td>
-                                <td>{{ booking.status }}</td>
+                                <th>Booking ID</th>
+                                <th>Room ID</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Guests</th>
+                                <th>Price</th>
+                                <th>Status</th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <!-- Loop through bookings and display details -->
+                        {% if bookings %}
+                            {% for booking in bookings %}
+                                <tr>
+                                    <td>{{ booking.booking_id }}</td>
+                                    <td>{{ booking.room_id }}</td>
+                                    <td>{{ booking.check_in }}</td>
+                                    <td>{{ booking.check_out }}</td>
+                                    <td>{{ booking.guests }}</td>
+                                    <td>{{ booking.price }}</td>
+                                    <td>{{ booking.status }}</td>
+                                </tr>
+                            
+                            <!-- If no bookings found -->
+                            {% empty %}
+                            <tr>
+                                <td colspan="7">No bookings found.</td>
+                            </tr>
+
+                            {% endfor %}
+                        {% endif %}
                     </table>
                 </div>
             </div>
