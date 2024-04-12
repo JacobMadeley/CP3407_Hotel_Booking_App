@@ -256,12 +256,13 @@ def updatestatus(request):
     if request.method=='POST':
         form = UpdateRoomStatus(request.POST)
         if form.is_valid():
-            room_number=form.cleaned_data['room_number']
+            room_id=form.cleaned_data['room_id']
             room_status=form.cleaned_data['room_status']
-            room = Room.objects.filter(room_number=room_number).values()
+            room = Room.objects.all()[room_id-1]
             print(room)
-            room=Room.objects.all()[room[0]['room_id']]
+            print(room_status)
             room.room_status = room_status
+            print(room.room_status)
             room.save()
     else:
         form = UpdateRoomStatus()

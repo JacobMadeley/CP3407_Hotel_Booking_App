@@ -92,5 +92,5 @@ class AddRecordForm(forms.ModelForm):
     
 
 class UpdateRoomStatus(forms.Form):
-    room_number = forms.IntegerField(required=True,widget=forms.widgets.TextInput(attrs={"placeholder":"Room Number", "class":"form-control"}), label="",error_messages={'required': ''})
+    room_id = forms.IntegerField(required=True,widget=forms.widgets.TextInput(attrs={"placeholder":"Room ID", "class":"form-control"}), label="",error_messages={'required': ''})
     room_status = forms.ChoiceField(required=True, label='Room Status', choices=[(1,'Occupied'), (2,'Free'),(3,'Needs Cleaning'), (4,'Needs Maintenance')], widget=forms.Select(attrs={"class": "form-control"}))
