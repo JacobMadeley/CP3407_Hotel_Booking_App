@@ -75,10 +75,10 @@ WSGI_APPLICATION = 'CP3407_Hotel_Booking_App.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hotel_booking_app',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
+        'PASSWORD': 'CP3407hotel',
+        'HOST': 'hoteldatabase2.c78og48cc7iv.ap-southeast-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
